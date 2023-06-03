@@ -24,10 +24,6 @@ namespace Negocio.Entidades
         public void Validar()
         {
             #region Validar
-            if (descripcion.Length < 10 || descripcion.Length > 200 || descripcion == null)
-            {
-                throw new CaracteresDentroDeRango("La cantidad de caracteres debe de ser entre 10 y 200");
-            }
             if (fecha == null)
             {
                 throw new CampoVacioException("El campo no puede estar vacio");

@@ -21,17 +21,10 @@ namespace Negocio.Entidades
         {
             #region Validar Usuario
 
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(email))
             {
                 throw new CampoVacioException("Los campos no pueden estar vacios");
             }
-
-            if(password.Length < 6 && !password.Any(char.IsUpper) == false && !password.Any(char.IsLower) == false && !password.Any(char.IsDigit) == false)
-            {
-                throw new ContraseñaException("La contraseña tiene que tener al menos 6 caracteres que incluyan letras mayúsculas " +
-                    "\r\n y minúsculas (al menos una de cada una) y dígitos (0 al 9)");
-            }
-
 
         #endregion
         }
