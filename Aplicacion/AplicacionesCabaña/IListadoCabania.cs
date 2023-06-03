@@ -1,14 +1,9 @@
-﻿using Negocio.Entidades;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DTOs;
 
 namespace Aplicacion.AplicacionesCabaña
 {
     public interface IListadoCabania
     {
-        public IEnumerable<Cabania> ListadoAllCabania();
+        public IEnumerable<CabaniaDTO> ListadoAllCabania();
     }
 }

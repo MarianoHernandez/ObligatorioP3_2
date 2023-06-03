@@ -1,4 +1,5 @@
-﻿using Negocio.Entidades;
+﻿using DTOs;
+using Negocio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Aplicacion.AplicacionesCabaña
 {
     public interface IAltaCabania
     {
-        void Alta(Cabania cabania);
+        void Alta(CabaniaDTO cabania);
     }
 }

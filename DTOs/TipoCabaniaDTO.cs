@@ -8,13 +8,7 @@ namespace DTOs
 {
     public class TipoCabaniaDTO
     {
-        public TipoCabaniaDTO(int id, string nombre, string descripcion, decimal costo)
-        {
-            Id = id;
-            Nombre = nombre;
-            Descripcion = descripcion;
-            Costo = costo;
-        }
+
 
         public int Id { get; set; }
 

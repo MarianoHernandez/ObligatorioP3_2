@@ -1,11 +1,6 @@
-﻿using Negocio.Entidades;
-using Negocio.InterfacesRepositorio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using Negocio.InterfacesRepositorio;
+using DTOs;
+using Negocio.ValueObjects;
 
 namespace Aplicacion.AplicacionesCabaña
 {
@@ -17,9 +12,25 @@ namespace Aplicacion.AplicacionesCabaña
             RepositorioCabania = repositorioCabania;
         }
 
-        public IEnumerable<Cabania> ListadoAllCabania()
+        public IEnumerable<CabaniaDTO> ListadoAllCabania()
         {
-            return RepositorioCabania.FindAll();
+            return RepositorioCabania.FindAll().Select(cabania => new CabaniaDTO()
+            {
+                Nombre = cabania.Nombre.Value,
+                Id = cabania.Id,
+                Descripcion = cabania.Descripcion,
+                TipoCabaniaId = cabania.TipoCabaniaId,
+                Jacuzzi = cabania.Jacuzzi,
+                Habilitada = cabania.Habilitada,
+                CantidadPersonas = cabania.CantidadPersonas,
+                Foto = cabania.Foto,
+                TipoCabania = new TipoCabaniaDTO() { 
+                    Id = cabania.TipoCabania.Id,
+                    Costo = cabania.TipoCabania.Costo,
+                    Descripcion = cabania.TipoCabania.Descripcion.Value,
+                    Nombre =  cabania.TipoCabania.Nombre
+                }
+            }); ;
         }
     }
 }
