@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExcepcionesPropias\ExcepcionesPropias.csproj" />
+    <ProjectReference Include="..\Negocio\Negocio.csproj" />
   </ItemGroup>
 
 </Project>

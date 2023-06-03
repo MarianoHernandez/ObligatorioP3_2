@@ -6,13 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Negocio.ExcepcionesPropias;
 using System.ComponentModel.DataAnnotations;
+using Negocio.ValueObjects;
 
 namespace Negocio.Entidades
 {
     public class Mantenimiento : IValidable
     {
         public DateTime fecha { get; set; }
-        public string descripcion { get; set; }
+        public DescripcionMantenimiento descripcion { get; set; }
         public decimal costo { get; set; }
         [Required]
         public string trabajador { get; set; }
