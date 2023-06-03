@@ -1,11 +1,13 @@
 ﻿using Negocio.Entidades;
 using Negocio.ExcepcionesPropias;
+using DTOs;
 using Negocio.InterfacesRepositorio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Negocio.ValueObjects;
 
 namespace Aplicacion.AplicacionesMantenimientos
 {
@@ -20,10 +22,20 @@ namespace Aplicacion.AplicacionesMantenimientos
         }
 
 
-        public void Alta(Mantenimiento mantenimiento)
+        public void Alta(MantenimientoDTO mantenimiento)
         {
-           
-            Repo.Add(mantenimiento);
+
+            Mantenimiento nuevo = new Mantenimiento()
+            {
+                fecha = mantenimiento.fecha,
+                descripcion = new DescripcionMantenimiento(mantenimiento.descripcion),
+                costo = mantenimiento.costo,
+                trabajador = mantenimiento.trabajador,
+                CabaniaId = mantenimiento.CabaniaId
+
+            };
+            Repo.Add(nuevo);
+            mantenimiento.Id = nuevo.Id;
 
 
         }
