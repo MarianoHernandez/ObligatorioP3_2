@@ -10,7 +10,7 @@ namespace Aplicacion.AplicacionesMantenimientos
 {
     public interface IFindByDate
     {
-           IEnumerable<Mantenimiento> FindByDateMantenimiento(DateTime d1, DateTime d2);
+           IEnumerable<MantenimientoDTO> FindByDateMantenimiento(DateTime d1, DateTime d2);
        
     }
 }

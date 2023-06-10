@@ -25,8 +25,9 @@ namespace WebApi.Controllers
         IValidarSession ValidarLogin { get; set; }
         IFindByIdCabania Encontrar { get; set; }
         IObtenerMaxMinDescripcion ObtenerMaxMin { get; set; }
+        FindByIdTipo FindTipoById {get; set;}
 
-        public CabaniaControllerApi(IAltaCabania altaCabania, IFindByIdCabania enco, IListadoTipoCabania listadoTipoCabania, IListadoCabania listadoCabania, IValidarSession validarSession, IObtenerMaxMinDescripcion obtenerMaxMin, IWebHostEnvironment webHostEnvironment, IBusquedaConFiltros busquedaConFiltros)
+        public CabaniaControllerApi(FindByIdTipo findByIdTipo,IAltaCabania altaCabania, IFindByIdCabania enco, IListadoTipoCabania listadoTipoCabania, IListadoCabania listadoCabania, IValidarSession validarSession, IObtenerMaxMinDescripcion obtenerMaxMin, IWebHostEnvironment webHostEnvironment, IBusquedaConFiltros busquedaConFiltros)
         {
             AltaCabania = altaCabania;
             ListadoTipoCabania = listadoTipoCabania;
@@ -36,6 +37,7 @@ namespace WebApi.Controllers
             ValidarLogin = validarSession;
             Encontrar = enco;
             ObtenerMaxMin = obtenerMaxMin;
+            FindTipoById =findByIdTipo;
         }
         // GET: api/<CabaniaControllerApi>
         [HttpGet(Name = "Index")]
@@ -54,12 +56,13 @@ namespace WebApi.Controllers
         }
 
         // POST api/<CabaniaControllerApi>
-        [HttpPost(Name = "Create")]
+        [HttpPost("Create",Name = "Create")]
         public IActionResult Post([FromBody] CabaniaDTO? cabania)
         {
             if (cabania == null) return BadRequest("No se envió información de cabania");
             try
             {
+                FindByIdTipo.FindOneById(CabaniaDTO.)
                 AltaCabania.Alta(cabania);
             }
             catch (NombreInvalidoException ex)
