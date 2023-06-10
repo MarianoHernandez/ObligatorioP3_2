@@ -29,6 +29,7 @@ namespace WebApi.Controllers
 
         public CabaniaControllerApi(FindByIdTipo findByIdTipo,IAltaCabania altaCabania, IFindByIdCabania enco, IListadoTipoCabania listadoTipoCabania, IListadoCabania listadoCabania, IValidarSession validarSession, IObtenerMaxMinDescripcion obtenerMaxMin, IWebHostEnvironment webHostEnvironment, IBusquedaConFiltros busquedaConFiltros)
         {
+            hola
             AltaCabania = altaCabania;
             ListadoTipoCabania = listadoTipoCabania;
             ListadoCabania = listadoCabania;
