@@ -38,7 +38,7 @@ namespace WebApi.Controllers
             ObtenerMaxMin = obtenerMaxMin;
         }
         // GET: api/<CabaniaControllerApi>
-        [HttpGet(Name = "Index")]
+        [HttpGet("index",Name = "Index")]
         public IActionResult Get() //FINDALL
         {
             IEnumerable<CabaniaDTO> cabanias = ListadoCabania.ListadoAllCabania();
