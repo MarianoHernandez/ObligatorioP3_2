@@ -1,4 +1,5 @@
-﻿using Negocio.Entidades;
+﻿using DTOs;
+using Negocio.Entidades;
 using Negocio.InterfacesRepositorio;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,11 @@ namespace Aplicacion.AplicacionesMantenimientos
         public IEnumerable<Mantenimiento> ListadoAllMantenimientos()
         {
             return Repo.FindAll();
+        }
+
+        IEnumerable<MantenimientoDTO> IListadoMantenimiento.ListadoAllMantenimientos()
+        {
+            throw new NotImplementedException();
         }
     }
 }

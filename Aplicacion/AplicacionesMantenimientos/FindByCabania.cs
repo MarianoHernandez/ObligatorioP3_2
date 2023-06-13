@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DTOs;
+using Negocio.ValueObjects;
 
 namespace Aplicacion.AplicacionesMantenimientos
 {
@@ -14,8 +16,15 @@ namespace Aplicacion.AplicacionesMantenimientos
         public FindByCabania(IRepositorioMantenimiento repo) {
             Repo = repo;
         }
-        public IEnumerable<Mantenimiento> FindMantenimientoByCabania(int id) {
-           return Repo.FindByCabania(id);
+        public IEnumerable<MantenimientoDTO> FindMantenimientoByCabania(int id) {
+            
+           return Repo.FindByCabania(id).Select(mantenimiento=> new MantenimientoDTO
+           {
+               fecha = mantenimiento.fecha,
+               costo = mantenimiento.costo,
+               trabajador = mantenimiento.trabajador,
+               CabaniaId = mantenimiento.CabaniaId
+           });
         }
 
     }

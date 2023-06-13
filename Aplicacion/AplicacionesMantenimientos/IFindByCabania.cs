@@ -11,7 +11,7 @@ namespace Aplicacion.AplicacionesMantenimientos
     public interface IFindByCabania
     {
 
-        public IEnumerable<Mantenimiento> FindMantenimientoByCabania(int id);
+        public IEnumerable<MantenimientoDTO> FindMantenimientoByCabania(int id);
 
     }
 }

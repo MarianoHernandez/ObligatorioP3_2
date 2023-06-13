@@ -51,7 +51,6 @@ namespace Datos.Repositorios
         }
         public TipoCabania FindById(int id)
         {
-
             return LibreriaContext.TipoCabania.Find(id);
         }
         #region Not Implemented
