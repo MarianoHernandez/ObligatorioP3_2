@@ -5,7 +5,7 @@ using Negocio.ExcepcionesPropias;
 using PresentacionMVC.Models;
 using System.Net.WebSockets;
 using static System.Runtime.InteropServices.JavaScript.JSType;
-using Aplicacion.AplicacionesCabaña;
+using Aplicacion.AplicacionesCabania;
 using Negocio.Entidades;
 using Negocio.ExcepcionesPropias.Cabanias;
 

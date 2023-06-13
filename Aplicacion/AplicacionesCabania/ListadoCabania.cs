@@ -2,7 +2,7 @@
 using DTOs;
 using Negocio.ValueObjects;
 
-namespace Aplicacion.AplicacionesCabaña
+namespace Aplicacion.AplicacionesCabania
 {
     public class ListadoCabania : IListadoCabania
     {
@@ -18,7 +18,7 @@ namespace Aplicacion.AplicacionesCabaña
             {
                 Nombre = cabania.Nombre.Value,
                 Id = cabania.Id,
-                Descripcion = cabania.Descripcion,
+                Descripcion = cabania.Descripcion.Value,
                 TipoCabaniaId = cabania.TipoCabaniaId,
                 Jacuzzi = cabania.Jacuzzi,
                 Habilitada = cabania.Habilitada,

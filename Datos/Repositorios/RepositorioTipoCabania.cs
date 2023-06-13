@@ -51,7 +51,8 @@ namespace Datos.Repositorios
         }
         public TipoCabania FindById(int id)
         {
-            return LibreriaContext.TipoCabania.Find(id);
+            TipoCabania tipo = LibreriaContext.TipoCabania.SingleOrDefault(tipo => tipo.Id == id);
+            return tipo == null ? throw new NoEncontradoException("No se encontro el Tipo de Cabania") : tipo;
         }
         #region Not Implemented
 

@@ -2,7 +2,7 @@
 
 namespace Aplicacion.AplicacionesTipoCabaña
 {
-    public interface IFindById
+    public interface IFindByIdTipo
     {
         public TipoCabania FindOneById(int id);
     }

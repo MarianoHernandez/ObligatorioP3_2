@@ -12,7 +12,7 @@ using Negocio.ValueObjects;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
-namespace Aplicacion.AplicacionesCabaña
+namespace Aplicacion.AplicacionesCabania
 {
     public class AltaCabania : IAltaCabania
     {
@@ -27,22 +27,23 @@ namespace Aplicacion.AplicacionesCabaña
         }
 
 
-        public void Alta( CabaniaDTO cabania)
+        public void Alta( CabaniaDTO cabania, TipoCabania tipo)
         {
             Parametro param = ObtenerMaxMin.ObtenerMaxMinDescripcion("Cabania");
-            Cabania.largoMaximo = param.ValorMaximo;
-            Cabania.largoMinimo = param.ValorMinimo;
+            DescripcionCabania.CantMaxCarNombre = param.ValorMaximo;
+            DescripcionCabania.CantMinCarNombre = param.ValorMinimo;
 
 
             Cabania nueva = new() {
                 Nombre = new NombreCabania(cabania.Nombre),
                 Id = cabania.Id,
-                Descripcion = cabania.Descripcion,
+                Descripcion = new DescripcionCabania(cabania.Descripcion),
                 TipoCabaniaId = cabania.TipoCabaniaId,
                 Jacuzzi = cabania.Jacuzzi,
                 Habilitada = cabania.Habilitada,
                 CantidadPersonas = cabania.CantidadPersonas,
                 Foto = cabania.Foto,
+                TipoCabania = tipo,
             };
 
             Repo.Add(nueva);

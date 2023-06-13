@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Aplicacion.AplicacionesTipoCabaña
 {
-    public class FindById : IFindById
+    public class FindByIdTipo : IFindByIdTipo
     {
         public IRepositorioTipoCabania Repo;
 
-        public FindById(IRepositorioTipoCabania repo)
+        public FindByIdTipo(IRepositorioTipoCabania repo)
         {
             Repo = repo;
         }

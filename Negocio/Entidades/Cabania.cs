@@ -19,7 +19,8 @@ using Negocio.ValueObjects;
 
 namespace Negocio.Entidades
 {
-    [Index(nameof(Nombre), IsUnique = true)]
+    [Table("Cabania")]
+
     public class Cabania : IValidable
     {
         [DisplayName("Numero Habitacion")]
@@ -29,10 +30,11 @@ namespace Negocio.Entidades
         
         public int TipoCabaniaId { get; set; }
         
-        [Display(Name = "Nombre del tema")]
-        public NombreCabania Nombre { get; set; }
+        [Display(Name = "Nombre de cabania")]
+        public NombreCabania? Nombre { get; set; }
 
-        public string Descripcion { get; set; }
+        [Display(Name = "Descripcion de cabania")]
+        public DescripcionCabania? Descripcion { get; set; }
         
         public bool Jacuzzi { get; set; }
         
@@ -44,18 +46,12 @@ namespace Negocio.Entidades
         
 
         public static int largoMaximo = 500;
+
         public static int largoMinimo = 10;
 
 
         public void Validar()
         {
-            #region Validar Descripcion
-
-            if (Descripcion.Length < largoMinimo || Descripcion.Length > largoMaximo)
-            {
-                throw new DescripcionInvalidaException($"La descripcion no puede tener menos de {largoMinimo} caracteres ni mas de {largoMaximo}");
-            }
-            #endregion
 
         }
     }

@@ -47,7 +47,7 @@ namespace Datos.Repositorios
 
         public IEnumerable<Cabania> FindCabaña(string nombre, int tipoId, int cantidadPers, bool habilitada)
         {
-            IEnumerable<Cabania> lista = LibreriaContext.Cabania.Include(o => o.TipoCabania);
+            IEnumerable<Cabania> lista = LibreriaContext.Cabania.Include(o => o.TipoCabania).ToList();
 
              if (nombre != null) {
                 lista = lista.Where(cab => cab.Nombre.Value.Contains(nombre));
@@ -58,7 +58,7 @@ namespace Datos.Repositorios
             }
             lista = lista.Where(cab => cab.Habilitada == habilitada);
             
-            return lista.ToList();
+            return lista;
         }
 
         public IEnumerable<Cabania> FindCabañaTipo(string tipo)

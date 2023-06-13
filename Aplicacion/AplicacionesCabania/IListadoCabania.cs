@@ -1,6 +1,6 @@
 ﻿using DTOs;
 
-namespace Aplicacion.AplicacionesCabaña
+namespace Aplicacion.AplicacionesCabania
 {
     public interface IListadoCabania
     {

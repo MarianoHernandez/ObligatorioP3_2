@@ -2,7 +2,9 @@
 using Negocio.ExcepcionesPropias.Cabanias;
 using Negocio.InterfacesDominio;
 using Negocio.ValueObjects;
+using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 
 namespace Negocio.Entidades
@@ -14,6 +16,7 @@ namespace Negocio.Entidades
 
         public string Nombre { get; set; }
 
+        [Display(Name = "Descripcion de tipo")]
         public DescripcionTipoCabania Descripcion { get; set;}
         
         public decimal Costo { get; set; }

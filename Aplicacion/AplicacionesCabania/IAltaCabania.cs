@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aplicacion.AplicacionesCabaña
+namespace Aplicacion.AplicacionesCabania
 {
     public interface IAltaCabania
     {
-        void Alta(CabaniaDTO cabania);
+        void Alta(CabaniaDTO cabania, TipoCabania tipo);
     }
 }

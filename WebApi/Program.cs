@@ -1,4 +1,4 @@
-using Aplicacion.AplicacionesCabaña;
+using Aplicacion.AplicacionesCabania;
 using Aplicacion.AplicacionesMantenimientos;
 using Aplicacion.AplicacionesTipoCabaña;
 using Aplicacion.AplicacionesUsuario;
@@ -44,7 +44,7 @@ builder.Services.AddScoped<IFindByCabania, FindByCabania>();
 #region Build cabania
 builder.Services.AddScoped<IAltaCabania, AltaCabania>();
 builder.Services.AddScoped<IListadoCabania, ListadoCabania>();
-builder.Services.AddScoped<IFindById, FindById>();
+builder.Services.AddScoped<IFindByIdTipo, FindByIdTipo>();
 builder.Services.AddScoped<IFindByIdCabania, FindByIdCabania>();
 
 builder.Services.AddScoped<IBusquedaConFiltros, BusquedaConFiltros>();

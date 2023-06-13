@@ -1,12 +1,12 @@
-﻿using Aplicacion.AplicacionesCabaña;
+﻿using Aplicacion.AplicacionesCabania;
 using Aplicacion.AplicacionesTipoCabaña;
 using Aplicacion.AplicacionesUsuario;
 using Aplicacion.AplicacionParametros;
 using DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Negocio.Entidades;
+using Negocio.ExcepcionesPropias;
 using Negocio.ExcepcionesPropias.Cabanias;
-using Negocio.ValueObjects;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,27 +21,28 @@ namespace WebApi.Controllers
         IListadoTipoCabania ListadoTipoCabania { get; set; }
         IListadoCabania ListadoCabania { get; set; }
         IBusquedaConFiltros BusquedaConFiltros { get; set; }
-        IWebHostEnvironment Env { get; set; }
-        IValidarSession ValidarLogin { get; set; }
-        IFindByIdCabania Encontrar { get; set; }
+        IFindByIdCabania FindByIdCabania { get; set; }
         IObtenerMaxMinDescripcion ObtenerMaxMin { get; set; }
-        FindByIdTipo FindTipoById {get; set;}
+        IFindByIdTipo FindTipoById {get; set;}
 
-        public CabaniaControllerApi(FindByIdTipo findByIdTipo,IAltaCabania altaCabania, IFindByIdCabania enco, IListadoTipoCabania listadoTipoCabania, IListadoCabania listadoCabania, IValidarSession validarSession, IObtenerMaxMinDescripcion obtenerMaxMin, IWebHostEnvironment webHostEnvironment, IBusquedaConFiltros busquedaConFiltros)
+        public CabaniaControllerApi(
+            IFindByIdTipo findByIdTipo,
+            IAltaCabania altaCabania, 
+            IFindByIdCabania findByIdCabania, 
+            IListadoTipoCabania listadoTipoCabania, 
+            IListadoCabania listadoCabania, 
+            IBusquedaConFiltros busquedaConFiltros)
         {
-            hola
+            
             AltaCabania = altaCabania;
             ListadoTipoCabania = listadoTipoCabania;
             ListadoCabania = listadoCabania;
-            Env = webHostEnvironment;
             BusquedaConFiltros = busquedaConFiltros;
-            ValidarLogin = validarSession;
-            Encontrar = enco;
-            ObtenerMaxMin = obtenerMaxMin;
+            FindByIdCabania = findByIdCabania;
             FindTipoById =findByIdTipo;
         }
         // GET: api/<CabaniaControllerApi>
-        [HttpGet("index",Name = "Index")]
+        [HttpGet("index", Name = "Index")]
         public IActionResult Get() //FINDALL
         {
             IEnumerable<CabaniaDTO> cabanias = ListadoCabania.ListadoAllCabania();
@@ -51,43 +52,66 @@ namespace WebApi.Controllers
 
         // GET api/<CabaniaControllerApi>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            try
+            {
+                Cabania cab = FindByIdCabania.FindById(id);
+                return Ok(cab);
+            }
+            catch (NoEncontradoException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         // POST api/<CabaniaControllerApi>
-        [HttpPost("Create",Name = "Create")]
+        [HttpPost]
         public IActionResult Post([FromBody] CabaniaDTO? cabania)
         {
             if (cabania == null) return BadRequest("No se envió información de cabania");
             try
             {
-                FindByIdTipo.FindOneById(CabaniaDTO.)
-                AltaCabania.Alta(cabania);
+                TipoCabania tipo = FindTipoById.FindOneById(cabania.TipoCabaniaId);
+                AltaCabania.Alta(cabania, tipo);
             }
             catch (NombreInvalidoException ex)
             {
                 return BadRequest(ex.Message);
             }
-            catch
+            catch (NoEncontradoException ex)
             {
-                return StatusCode(500, "Ocurrión un error, no se pudo realizar el alta.");
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
             }
 
-            return CreatedAtRoute("FindById", new { id = cabania.Id }, cabania);
+            return CreatedAtRoute("Get", new { id = cabania.Id }, cabania);
         }
 
-        // PUT api/<CabaniaControllerApi>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpGet("MostrerFiltradas")]
+        public IActionResult MostrerFiltradas([FromQuery] string Nombre, int TipoID, int CantidadPersonas, bool Habilitada)
         {
+            IEnumerable<CabaniaDTO> filtradas = BusquedaConFiltros.GetCabanias(Nombre, TipoID, CantidadPersonas, Habilitada);
+            return Ok(filtradas);
         }
 
-        // DELETE api/<CabaniaControllerApi>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //// PUT api/<CabaniaControllerApi>/5
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+        //}
+
+        //// DELETE api/<CabaniaControllerApi>/5
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

@@ -21,6 +21,13 @@ namespace Datos.Entity
         //EN ESTE LUGAR ES DONDE SE CONFIGURA EF USANDO FLUENT API
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Cabania>().OwnsOne(C => C.Nombre).HasIndex(C => C.Value).IsUnique();
+            modelBuilder.Entity<Cabania>().OwnsOne(C => C.Descripcion).HasIndex(C => C.Value).IsUnique();
+            modelBuilder.Entity<Mantenimiento>().OwnsOne(M => M.descripcion).HasIndex(M => M.Value).IsUnique();
+            modelBuilder.Entity<TipoCabania>().OwnsOne(T => T.Descripcion).HasIndex(T => T.Value).IsUnique();
+
+
+
             base.OnModelCreating(modelBuilder);
         }
     }

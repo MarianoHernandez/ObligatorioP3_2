@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Datos.Entity;
 using Negocio.ExcepcionesPropias;
 using System.Net.Http;
-using Microsoft.AspNetCore.Http;
 
 namespace Datos.Repositorios
 {
