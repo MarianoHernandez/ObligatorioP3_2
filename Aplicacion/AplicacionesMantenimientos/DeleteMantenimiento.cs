@@ -1,4 +1,4 @@
-﻿using Aplicacion.AplicacionesTipoCabaña;
+﻿using Aplicacion.AplicacionesTipoCabania;
 using Negocio.Entidades;
 using Negocio.InterfacesRepositorio;
 using System;

@@ -1,5 +1,5 @@
 ﻿using Aplicacion.AplicacionesCabania;
-using Aplicacion.AplicacionesTipoCabaña;
+using Aplicacion.AplicacionesTipoCabania;
 using Aplicacion.AplicacionesUsuario;
 using Aplicacion.AplicacionParametros;
 using DTOs;
@@ -60,7 +60,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                Cabania cab = FindByIdCabania.FindById(id);
+                CabaniaDTO cab = FindByIdCabania.FindById(id);
                 return Ok(cab);
             }
             catch (NoEncontradoException ex)
