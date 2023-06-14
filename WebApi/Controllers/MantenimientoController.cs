@@ -21,13 +21,16 @@ namespace WebApi.Controllers
         IFindByDate CUfindByDate { get; set; }
         IFindByCabania CUfindByCabania { get; set; }
         IListadoMantenimiento CUlistadoMantenimiento { get; set; }
+        IFindByValues CUfindByValues { get; set; }
 
-        public MantenimientoController(IAltaMantenimiento cuAltaMantenimiento, IFindByDate cuFindByDate, IFindByCabania cuFindByCabania, IListadoMantenimiento cuListadoMantenimiento)
+        public MantenimientoController(IAltaMantenimiento cuAltaMantenimiento, IFindByDate cuFindByDate, IFindByCabania cuFindByCabania, IListadoMantenimiento cuListadoMantenimiento,
+           IFindByValues cuFindByValues )
         {
             CUaltaMantenimiento = cuAltaMantenimiento;
             CUfindByDate = cuFindByDate;
             CUfindByCabania = cuFindByCabania;
             CUlistadoMantenimiento = cuListadoMantenimiento;
+            CUfindByValues = cuFindByValues;
         }
 
         // GET: api/<MantenimientoController>
@@ -85,6 +88,27 @@ namespace WebApi.Controllers
             try
             {
                 IEnumerable<MantenimientoDTO> mantenimientos = CUfindByDate.FindByDateMantenimiento(f1, f2);
+                return Ok(mantenimientos);
+            }
+            catch (MantenimientoInvalidoException ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+            catch
+            {
+                return StatusCode(500, "Ocurrión un error, no se pudo encontrar los mantenimientos.");
+            }
+        }
+
+        [HttpPost("busquedaPorValores/{costo_1},{costo_2}")]
+
+        public IActionResult MantenimientosPorValores(int c1, int c2)
+        {
+            if (c1 == null || c2 == null) return BadRequest("Los costos no son validas");
+            try
+            {
+                IEnumerable<MantenimientoDTO> mantenimientos = CUfindByValues.MantenimientosPorValores(c1, c2);
                 return Ok(mantenimientos);
             }
             catch (MantenimientoInvalidoException ex)

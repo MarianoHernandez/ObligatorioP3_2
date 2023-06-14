@@ -95,5 +95,13 @@ namespace Datos.Repositorios
             return lista;
         }
 
+        public IEnumerable<Mantenimiento> MantenimientosPorValores(int c1, int c2)
+        {
+            IEnumerable<Mantenimiento> lista = Contexto.Mantenimiento
+                .Include(nom => nom.trabajador)
+                .Where(cos => cos.costo >= c1 && cos.costo <= c2)
+                .ToList();
+                return lista;
+        }
     }
 }
