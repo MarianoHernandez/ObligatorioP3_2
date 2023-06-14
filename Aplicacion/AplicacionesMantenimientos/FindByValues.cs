@@ -1,25 +1,24 @@
-﻿using Negocio.Entidades;
-using Negocio.InterfacesRepositorio;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DTOs;
+using Negocio.InterfacesRepositorio;
 
 namespace Aplicacion.AplicacionesMantenimientos
 {
-    public class FindByDate : IFindByDate
+    public class FindByValues : IFindByValues
     {
-        public IRepositorioMantenimiento Repo { get; set; }
-
-        public FindByDate(IRepositorioMantenimiento repo)
+        IRepositorioMantenimiento Repo { get; set; }
+        public FindByValues(IRepositorioMantenimiento repo)
         {
             Repo = repo;
         }
-        public IEnumerable<MantenimientoDTO> FindByDateMantenimiento(DateTime d1, DateTime d2)
+        public IEnumerable<MantenimientoDTO> MantenimientosPorValores(int c1, int c2)
         {
-            return Repo.FindMantenimiento(d1, d2).Select(mantenimiento => new MantenimientoDTO
+
+            return Repo.MantenimientosPorValores(c1, c2).Select(mantenimiento => new MantenimientoDTO
             {
                 fecha = mantenimiento.fecha,
                 costo = mantenimiento.costo,
@@ -28,5 +27,7 @@ namespace Aplicacion.AplicacionesMantenimientos
                 CabaniaId = mantenimiento.CabaniaId
             });
         }
+
     }
+}
 }

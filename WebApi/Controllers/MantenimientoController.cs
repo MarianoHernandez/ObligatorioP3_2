@@ -21,13 +21,16 @@ namespace WebApi.Controllers
         IFindByDate CUfindByDate { get; set; }
         IFindByCabania CUfindByCabania { get; set; }
         IListadoMantenimiento CUlistadoMantenimiento { get; set; }
+        IFindByValues CUfindByValues { get; set; }
 
-        public MantenimientoController(IAltaMantenimiento cuAltaMantenimiento, IFindByDate cuFindByDate, IFindByCabania cuFindByCabania, IListadoMantenimiento cuListadoMantenimiento)
+        public MantenimientoController(IAltaMantenimiento cuAltaMantenimiento, IFindByDate cuFindByDate, IFindByCabania cuFindByCabania, IListadoMantenimiento cuListadoMantenimiento,
+           IFindByValues cuFindByValues )
         {
             CUaltaMantenimiento = cuAltaMantenimiento;
             CUfindByDate = cuFindByDate;
             CUfindByCabania = cuFindByCabania;
             CUlistadoMantenimiento = cuListadoMantenimiento;
+            CUfindByValues = cuFindByValues;
         }
 
         // GET: api/<MantenimientoController>
@@ -41,7 +44,7 @@ namespace WebApi.Controllers
         // GET api/<MantenimientoController>/5
         [HttpGet("{id}", Name = "FindById")]
         public IActionResult Get(int id)
-        {            
+        {
             if (id <= 0) return BadRequest("El id proporcionado no es válido");
             try
             {
@@ -78,13 +81,34 @@ namespace WebApi.Controllers
             return CreatedAtRoute("FindById", new { id = mantenimiento.Id }, mantenimiento);
         }
 
-        [HttpPost ("busquedaPorFecha/{f1},{f2}")]
+        [HttpPost("busquedaPorFecha/{f1},{f2}")]
         public IActionResult FindByDate(DateTime f1, DateTime f2)
         {
             if (f1 == null || f2 == null) return BadRequest("Las fechas no son validas");
             try
             {
                 IEnumerable<MantenimientoDTO> mantenimientos = CUfindByDate.FindByDateMantenimiento(f1, f2);
+                return Ok(mantenimientos);
+            }
+            catch (MantenimientoInvalidoException ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+            catch
+            {
+                return StatusCode(500, "Ocurrión un error, no se pudo encontrar los mantenimientos.");
+            }
+        }
+
+        [HttpPost("busquedaPorValores/{costo_1},{costo_2}")]
+
+        public IActionResult MantenimientosPorValores(int c1, int c2)
+        {
+            if (c1 == null || c2 == null) return BadRequest("Los costos no son validas");
+            try
+            {
+                IEnumerable<MantenimientoDTO> mantenimientos = CUfindByValues.MantenimientosPorValores(c1, c2);
                 return Ok(mantenimientos);
             }
             catch (MantenimientoInvalidoException ex)
@@ -105,14 +129,12 @@ namespace WebApi.Controllers
         //    return View();
         //}
 
-        // DELETE api/<MantenimientoController>/5
+        ////DELETE api/<MantenimientoController>/5
         //[HttpDelete("{id}")]
         //public void Delete(int id)
         //{
-        //        ViewBag.Mensaje = "Ocurrio un error";
-        //        return View();
-        //    }
+        //    return View();
         //}
-        
     }
+
 }
