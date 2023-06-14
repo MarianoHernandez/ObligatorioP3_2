@@ -18,19 +18,27 @@ namespace Aplicacion.AplicacionesMantenimientos
             Repo = repo;
         }
 
-        public IEnumerable<Mantenimiento> ObtenerListado()
+        public IEnumerable<MantenimientoDTO> ListadoAllMantenimientos()
         {
-            return Repo.FindAll();
+            return Repo.FindAll().Select(mantenimiento => new MantenimientoDTO
+            {
+                fecha = mantenimiento.fecha,
+                costo = mantenimiento.costo,
+                descripcion = mantenimiento.descripcion.Value,
+                trabajador = mantenimiento.trabajador,
+                CabaniaId = mantenimiento.CabaniaId
+            }); ; 
         }
 
-        public IEnumerable<Mantenimiento> ListadoAllMantenimientos()
-        {
-            return Repo.FindAll();
-        }
-
-        IEnumerable<MantenimientoDTO> IListadoMantenimiento.ListadoAllMantenimientos()
-        {
-            throw new NotImplementedException();
-        }
+        //IEnumerable<MantenimientoDTO> IListadoMantenimiento.ListadoAllMantenimientos()
+        //{
+        //    return Repo.FindAll().Select(mantenimiento => new MantenimientoDTO
+        //    {
+        //        fecha = mantenimiento.fecha,
+        //        costo = mantenimiento.costo,
+        //        trabajador = mantenimiento.trabajador,
+        //        CabaniaId = mantenimiento.CabaniaId
+        //    });
+        //}
     }
 }

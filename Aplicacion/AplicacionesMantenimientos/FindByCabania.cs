@@ -22,6 +22,7 @@ namespace Aplicacion.AplicacionesMantenimientos
            {
                fecha = mantenimiento.fecha,
                costo = mantenimiento.costo,
+               descripcion = mantenimiento.descripcion.Value,
                trabajador = mantenimiento.trabajador,
                CabaniaId = mantenimiento.CabaniaId
            });

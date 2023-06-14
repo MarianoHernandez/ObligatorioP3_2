@@ -41,7 +41,7 @@ namespace WebApi.Controllers
         // GET api/<MantenimientoController>/5
         [HttpGet("{id}", Name = "FindById")]
         public IActionResult Get(int id)
-        {            
+        {
             if (id <= 0) return BadRequest("El id proporcionado no es válido");
             try
             {
@@ -78,7 +78,7 @@ namespace WebApi.Controllers
             return CreatedAtRoute("FindById", new { id = mantenimiento.Id }, mantenimiento);
         }
 
-        [HttpPost ("busquedaPorFecha/{f1},{f2}")]
+        [HttpPost("busquedaPorFecha/{f1},{f2}")]
         public IActionResult FindByDate(DateTime f1, DateTime f2)
         {
             if (f1 == null || f2 == null) return BadRequest("Las fechas no son validas");
@@ -105,14 +105,12 @@ namespace WebApi.Controllers
         //    return View();
         //}
 
-        // DELETE api/<MantenimientoController>/5
+        ////DELETE api/<MantenimientoController>/5
         //[HttpDelete("{id}")]
         //public void Delete(int id)
         //{
-        //        ViewBag.Mensaje = "Ocurrio un error";
-        //        return View();
-        //    }
+        //    return View();
         //}
-        
     }
+
 }
