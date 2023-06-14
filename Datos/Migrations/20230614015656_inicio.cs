@@ -33,7 +33,7 @@ namespace Datos.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Descripcion_Value = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Costo = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
@@ -62,8 +62,8 @@ namespace Datos.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TipoCabaniaId = table.Column<int>(type: "int", nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nombre_Value = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Descripcion_Value = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Jacuzzi = table.Column<bool>(type: "bit", nullable: false),
                     Habilitada = table.Column<bool>(type: "bit", nullable: false),
                     CantidadPersonas = table.Column<int>(type: "int", nullable: false),
@@ -87,7 +87,7 @@ namespace Datos.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    descripcion_Value = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     costo = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     trabajador = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CabaniaId = table.Column<int>(type: "int", nullable: false)
@@ -104,10 +104,18 @@ namespace Datos.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cabania_Nombre",
+                name: "IX_Cabania_Descripcion_Value",
                 table: "Cabania",
-                column: "Nombre",
-                unique: true);
+                column: "Descripcion_Value",
+                unique: true,
+                filter: "[Descripcion_Value] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cabania_Nombre_Value",
+                table: "Cabania",
+                column: "Nombre_Value",
+                unique: true,
+                filter: "[Nombre_Value] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cabania_TipoCabaniaId",
@@ -120,9 +128,21 @@ namespace Datos.Migrations
                 column: "CabaniaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Mantenimiento_descripcion_Value",
+                table: "Mantenimiento",
+                column: "descripcion_Value",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Parametro_Nombre",
                 table: "Parametro",
                 column: "Nombre",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TipoCabania_Descripcion_Value",
+                table: "TipoCabania",
+                column: "Descripcion_Value",
                 unique: true);
 
             migrationBuilder.CreateIndex(

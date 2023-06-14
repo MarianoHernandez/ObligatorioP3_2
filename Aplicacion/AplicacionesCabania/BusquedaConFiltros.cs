@@ -29,13 +29,6 @@ namespace Aplicacion.AplicacionesCabania
                 Habilitada = cabania.Habilitada,
                 CantidadPersonas = cabania.CantidadPersonas,
                 Foto = cabania.Foto,
-                TipoCabania = new TipoCabaniaDTO()
-                {
-                    Id = cabania.TipoCabania.Id,
-                    Costo = cabania.TipoCabania.Costo,
-                    Descripcion = cabania.TipoCabania.Descripcion.Value,
-                    Nombre = cabania.TipoCabania.Nombre
-                }
             });
         }
     }

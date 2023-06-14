@@ -95,6 +95,7 @@ namespace WebApi.Controllers
             return CreatedAtRoute("Get", new { id = cabania.Id }, cabania);
         }
 
+        // GET api/<CabaniaControllerApi>
         [HttpGet("MostrerFiltradas")]
         public IActionResult MostrerFiltradas([FromQuery] string Nombre, int TipoID, int CantidadPersonas, bool Habilitada)
         {
@@ -102,16 +103,5 @@ namespace WebApi.Controllers
             return Ok(filtradas);
         }
 
-        //// PUT api/<CabaniaControllerApi>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE api/<CabaniaControllerApi>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

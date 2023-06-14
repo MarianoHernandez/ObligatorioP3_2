@@ -26,7 +26,5 @@ namespace DTOs
 
         public string Foto { get; set; }
 
-        public TipoCabaniaDTO TipoCabania { get; set; }
-
     }
 }
