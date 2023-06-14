@@ -16,23 +16,23 @@ namespace Aplicacion.AplicacionesCabania
         {
             return RepositorioCabania.FindAll().Select(cab => new CabaniaDTO()
             {
-                    Id = cab.Id,
-                    Nombre = cab.Nombre.Value,
-                    TipoCabaniaId = cab.TipoCabaniaId,
-                    Descripcion = cab.Descripcion.Value,
-                    Jacuzzi = cab.Jacuzzi,
-                    Habilitada = cab.Habilitada,
-                    CantidadPersonas = cab.CantidadPersonas,
-                    Foto = cab.Foto,
-                    TipoCabaniaDTO = new TipoCabaniaDTO()
-                    {
-                        Id = cab.TipoCabania.Id,
-                        Nombre = cab.TipoCabania.Nombre,
-                        Descripcion = cab.TipoCabania.Descripcion.Value,
-                        Costo = cab.TipoCabania.Costo
-                    }
-               
-            }); ;
+                Id = cab.Id,
+                Nombre = cab.Nombre.Value,
+                TipoCabaniaId = cab.TipoCabaniaId,
+                Descripcion = cab.Descripcion.Value,
+                Jacuzzi = cab.Jacuzzi,
+                Habilitada = cab.Habilitada,
+                CantidadPersonas = cab.CantidadPersonas,
+                Foto = cab.Foto,
+                TipoCabaniaDTO = new TipoCabaniaDTO()
+                {
+                    Id = cab.TipoCabania.Id,
+                    Nombre = cab.TipoCabania.Nombre,
+                    Descripcion = cab.TipoCabania.Descripcion.Value,
+                    Costo = cab.TipoCabania.Costo
+                }
+
+            });
         }
     }
 }

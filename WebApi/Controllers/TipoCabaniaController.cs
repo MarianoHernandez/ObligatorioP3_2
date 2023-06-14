@@ -1,16 +1,13 @@
-﻿using Aplicacion.AplicacionesTipoCabaña;
+﻿using Aplicacion.AplicacionesTipoCabania;
 using Aplicacion.AplicacionesUsuario;
 using Aplicacion.AplicacionParametros;
-using Datos.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
 using Negocio.Entidades;
 using Negocio.EntidadesAuxiliares;
 using Negocio.ExcepcionesPropias;
 using Negocio.ExcepcionesPropias.Cabanias;
 using PresentacionMVC.Models;
-using System;
 
 
 namespace PresentacionMVC.Controllers
@@ -41,25 +38,25 @@ namespace PresentacionMVC.Controllers
         }
 
 
-        // GET: TipoCabaniaController
-        public ActionResult Index()
-        {
-            try
-            {
-                string userEmail = HttpContext.Session.GetString("user");
-                ValidarLogin.Validar(userEmail);
-                IEnumerable<TipoCabania> tipos = ListadoTipoCabania.ObtenerListado();
-                return View(tipos);
-            }catch (LoginIncorrectoException ex)
-            {
-                TempData["Error"] = "Es necesario iniciar sesion";
-                return RedirectToAction("Login", "Usuario");
-            }catch (Exception ex)
-            {
-                TempData["Error"] = ex.Message;
-                return View(ex);
-            }
-        }
+        //// GET: TipoCabaniaController
+        //public ActionResult Index()
+        //{
+        //    try
+        //    {
+        //        string userEmail = HttpContext.Session.GetString("user");
+        //        ValidarLogin.Validar(userEmail);
+        //        //IEnumerable<TipoCabania> tipos = ListadoTipoCabania.ObtenerListado();
+        //       // return View(tipos);
+        //    }catch (LoginIncorrectoException ex)
+        //    {
+        //        TempData["Error"] = "Es necesario iniciar sesion";
+        //        return RedirectToAction("Login", "Usuario");
+        //    }catch (Exception ex)
+        //    {
+        //        TempData["Error"] = ex.Message;
+        //        return View(ex);
+        //    }
+        //}
 
 
         public ActionResult FindOne(string accion) { 
@@ -159,50 +156,50 @@ namespace PresentacionMVC.Controllers
         }
 
         // POST: TipoCabaniaController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(TipoCabania tipoCabania)
-        {
-            try
-            {
-                string userEmail = HttpContext.Session.GetString("user");
-                ValidarLogin.Validar(userEmail);
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(TipoCabania tipoCabania)
+        //{
+        //    try
+        //    {
+        //        string userEmail = HttpContext.Session.GetString("user");
+        //        ValidarLogin.Validar(userEmail);
 
-                tipoCabania.Validar();
-                AltaTipoCabania.Alta(tipoCabania);
-                return RedirectToAction(nameof(Index));
-            }
-            catch (NombreInvalidoException ex)
-            {
-                TempData["Error"] = ex.Message;
-                return View();
-            }
-            catch (DescripcionInvalidaException ex)
-            {
-                TempData["Error"] = ex.Message;
-                return View();
-            }
-            catch (LoginIncorrectoException ex)
-            {
-                TempData["Error"] = "Es necesario iniciar sesion";
-                return RedirectToAction("Login", "Usuario");
-            }
-            catch (Exception ex)
-            {
-                if (ex.InnerException is SqlException)
-                {
-                    SqlException sql = (SqlException)ex.InnerException;
-                    if (sql.Number == 2601)
-                    {
-                        TempData["Error"] = "Nombre duplicacdo";
-                        return View();
-                    }
+        //        tipoCabania.Validar();
+        //        AltaTipoCabania.Alta(tipoCabania);
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch (NombreInvalidoException ex)
+        //    {
+        //        TempData["Error"] = ex.Message;
+        //        return View();
+        //    }
+        //    catch (DescripcionInvalidaException ex)
+        //    {
+        //        TempData["Error"] = ex.Message;
+        //        return View();
+        //    }
+        //    catch (LoginIncorrectoException ex)
+        //    {
+        //        TempData["Error"] = "Es necesario iniciar sesion";
+        //        return RedirectToAction("Login", "Usuario");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (ex.InnerException is SqlException)
+        //        {
+        //            SqlException sql = (SqlException)ex.InnerException;
+        //            if (sql.Number == 2601)
+        //            {
+        //                TempData["Error"] = "Nombre duplicacdo";
+        //                return View();
+        //            }
 
-                }
-                TempData["Error"] = ex.Message;
-                return View();
-            }
-        }
+        //        }
+        //        TempData["Error"] = ex.Message;
+        //        return View();
+        //    }
+        //}
 
         // GET: TipoCabaniaController/Delete/5
         public ActionResult Delete(string nombre)

@@ -1,9 +1,9 @@
-﻿using Negocio.Entidades;
+﻿using DTOs;
 
 namespace Aplicacion.AplicacionesTipoCabania
 {
     public interface IAltaTipoCabania
     {
-        public void Alta(TipoCabania tipoCabania);
+        public void Alta(TipoCabaniaDTO tipoCabania);
     }
 }

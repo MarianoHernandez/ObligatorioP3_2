@@ -1,6 +1,6 @@
 using Aplicacion.AplicacionesCabania;
 using Aplicacion.AplicacionesMantenimientos;
-using Aplicacion.AplicacionesTipoCabaña;
+using Aplicacion.AplicacionesTipoCabania;
 using Aplicacion.AplicacionesUsuario;
 using Aplicacion.AplicacionParametros;
 using Datos.Entity;
