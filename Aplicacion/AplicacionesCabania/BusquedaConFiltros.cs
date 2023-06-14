@@ -17,7 +17,7 @@ namespace Aplicacion.AplicacionesCabania
             Repo = repo;
         }
 
-        public IEnumerable<CabaniaDTO> GetCabanias(string nombre, int tipo, int cantidadPers, bool habilitada)
+        public IEnumerable<CabaniaDTO> GetCabanias(string? nombre, int? tipo, int? cantidadPers, bool? habilitada)
         {
             return Repo.FindCabaña(nombre, tipo, cantidadPers, habilitada).Select(cabania => new CabaniaDTO()
             {

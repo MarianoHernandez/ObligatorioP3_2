@@ -45,13 +45,13 @@ namespace Datos.Repositorios
             return encontrada == null ? throw new NoEncontradoException("No se encontro la Cabaña ingresada") : encontrada;
         }
 
-        public IEnumerable<Cabania> FindCabaña(string nombre, int tipoId, int cantidadPers, bool habilitada)
+        public IEnumerable<Cabania> FindCabaña(string? nombre, int? tipoId, int? cantidadPers, bool? habilitada)
         {
             IEnumerable<Cabania> lista = LibreriaContext.Cabania.Include(o => o.TipoCabania).ToList();
 
              if (nombre != null) {
                 lista = lista.Where(cab => cab.Nombre.Value.Contains(nombre));
-            }if (tipoId != 0) {
+            }if (tipoId != null) {
                 lista = lista.Where(cab => cab.TipoCabaniaId == tipoId);
             }if (cantidadPers > 0) { 
                 lista = lista.Where(cab => cab.CantidadPersonas >= cantidadPers);
@@ -76,6 +76,12 @@ namespace Datos.Repositorios
         {
             throw new NotImplementedException();
 
+        }
+
+        public IEnumerable<Cabania> FindPrecio(decimal valor) {
+            IEnumerable<Cabania> lista = LibreriaContext.Cabania.Include(o => o.TipoCabania).ToList();
+            lista = lista.Where(cab => cab.Habilitada && cab.Jacuzzi && cab.TipoCabania.Costo < valor) ;
+            return lista.ToList();
         }
     }
 }

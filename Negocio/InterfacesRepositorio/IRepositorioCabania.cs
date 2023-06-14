@@ -10,7 +10,8 @@ namespace Negocio.InterfacesRepositorio
 {
     public interface IRepositorioCabania : IRepositorio<Cabania>
     {
-        IEnumerable<Cabania> FindCabaña(string nombre, int tipo, int cantidadPers, bool habilitada  );
+        IEnumerable<Cabania> FindCabaña(string? nombre, int? tipo, int? cantidadPers, bool? habilitada);
         IEnumerable<Cabania>  FindCabañaTipo(string nombre);
+        IEnumerable<Cabania> FindPrecio(decimal valor);
     }
 }

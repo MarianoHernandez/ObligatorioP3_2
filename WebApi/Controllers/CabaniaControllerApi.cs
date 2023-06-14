@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Negocio.Entidades;
 using Negocio.ExcepcionesPropias;
 using Negocio.ExcepcionesPropias.Cabanias;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,6 +25,7 @@ namespace WebApi.Controllers
         IFindByIdCabania FindByIdCabania { get; set; }
         IObtenerMaxMinDescripcion ObtenerMaxMin { get; set; }
         IFindByIdTipo FindTipoById {get; set;}
+        IFiltroPrecio FiltroPrecio { get; set; }
 
         public CabaniaControllerApi(
             IFindByIdTipo findByIdTipo,
@@ -31,7 +33,8 @@ namespace WebApi.Controllers
             IFindByIdCabania findByIdCabania, 
             IListadoTipoCabania listadoTipoCabania, 
             IListadoCabania listadoCabania, 
-            IBusquedaConFiltros busquedaConFiltros)
+            IBusquedaConFiltros busquedaConFiltros,
+            IFiltroPrecio filtroPrecio)
         {
             
             AltaCabania = altaCabania;
@@ -40,6 +43,7 @@ namespace WebApi.Controllers
             BusquedaConFiltros = busquedaConFiltros;
             FindByIdCabania = findByIdCabania;
             FindTipoById =findByIdTipo;
+            FiltroPrecio = filtroPrecio;
         }
         // GET: api/<CabaniaControllerApi>
         [HttpGet("index", Name = "Index")]
@@ -92,16 +96,41 @@ namespace WebApi.Controllers
                 return StatusCode(500, ex.Message);
             }
 
-            return CreatedAtRoute("Get", new { id = cabania.Id }, cabania);
+            return Ok( cabania);
         }
 
         // GET api/<CabaniaControllerApi>
         [HttpGet("MostrerFiltradas")]
-        public IActionResult MostrerFiltradas([FromQuery] string Nombre, int TipoID, int CantidadPersonas, bool Habilitada)
+        public IActionResult MostrerFiltradas([FromQuery] string? Nombre, int? TipoID, int? CantidadPersonas, bool? Habilitada)
         {
             IEnumerable<CabaniaDTO> filtradas = BusquedaConFiltros.GetCabanias(Nombre, TipoID, CantidadPersonas, Habilitada);
             return Ok(filtradas);
         }
+
+        [HttpGet("PrecioFiltro")]
+        public IActionResult PrecioFiltradas([FromQuery] decimal valor)
+        {
+            if (valor == null) return BadRequest("No se envió información de cabania");
+            try
+            {
+                IEnumerable<CabaniaDTO> filtradas = FiltroPrecio.Filtro(valor);
+                return Ok(filtradas);
+            }
+            catch (NombreInvalidoException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (NoEncontradoException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+
+        }
+
 
     }
 }

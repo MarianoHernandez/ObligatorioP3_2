@@ -46,6 +46,7 @@ builder.Services.AddScoped<IAltaCabania, AltaCabania>();
 builder.Services.AddScoped<IListadoCabania, ListadoCabania>();
 builder.Services.AddScoped<IFindByIdTipo, FindByIdTipo>();
 builder.Services.AddScoped<IFindByIdCabania, FindByIdCabania>();
+builder.Services.AddScoped<IFiltroPrecio, FiltroPrecio>();
 
 builder.Services.AddScoped<IBusquedaConFiltros, BusquedaConFiltros>();
 
