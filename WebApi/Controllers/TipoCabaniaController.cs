@@ -78,61 +78,61 @@ namespace PresentacionMVC.Controllers
             }
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult FindOne(EliminarOModificar EM)
-        {
-            try
-            {
-                string userEmail = HttpContext.Session.GetString("user");
-                ValidarLogin.Validar(userEmail);
-                if(EM.Accion == "Eliminar") return RedirectToAction(nameof(Delete), new { nombre = EM.Nombre });
-                if(EM.Accion == "Editar") return RedirectToAction(nameof(Edit),new { nombre=EM.Nombre });
-                return RedirectToAction(nameof(Details), new { nombre = EM.Nombre });
-            }
-            catch (NombreInvalidoException ex)
-            {
-                TempData["Error"] = ex.Message;
-                return View();
-            }
-            catch (LoginIncorrectoException ex)
-            {
-                TempData["Error"] = "Es necesario iniciar sesion";
-                return RedirectToAction("Login", "Usuario");
-            }
-            catch (Exception ex)
-            {
-                TempData["Error"] = ex.Message;
-                return View();
-            }
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult FindOne(EliminarOModificar EM)
+        //{
+        //    try
+        //    {
+        //        string userEmail = HttpContext.Session.GetString("user");
+        //        ValidarLogin.Validar(userEmail);
+        //        if(EM.Accion == "Eliminar") return RedirectToAction(nameof(Delete), new { nombre = EM.Nombre });
+        //        if(EM.Accion == "Editar") return RedirectToAction(nameof(Edit),new { nombre=EM.Nombre });
+        //        return RedirectToAction(nameof(Details), new { nombre = EM.Nombre });
+        //    }
+        //    catch (NombreInvalidoException ex)
+        //    {
+        //        TempData["Error"] = ex.Message;
+        //        return View();
+        //    }
+        //    catch (LoginIncorrectoException ex)
+        //    {
+        //        TempData["Error"] = "Es necesario iniciar sesion";
+        //        return RedirectToAction("Login", "Usuario");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        TempData["Error"] = ex.Message;
+        //        return View();
+        //    }
+        //}
 
         // GET: TipoCabaniaController/Details/5
-        public ActionResult Details(string nombre)
-        {
-            try
-            {
-                string userEmail = HttpContext.Session.GetString("user");
-                ValidarLogin.Validar(userEmail);
-                TipoCabania tipo = FindByName.FindOne(nombre);
-                return View(tipo);
-            }
-            catch (LoginIncorrectoException ex)
-            {
-                TempData["Error"] = "Es necesario iniciar sesion";
-                return RedirectToAction("Login", "Usuario");
-            }
-            catch (NoEncontradoException ex) {
-                TempData["Error"] = "No se encontro el Tipo";
-                return RedirectToAction(nameof(FindOne), new { accion = "Detalle" });
-            }
+        //public ActionResult Details(string nombre)
+        //{
+        //    try
+        //    {
+        //        string userEmail = HttpContext.Session.GetString("user");
+        //        ValidarLogin.Validar(userEmail);
+        //        TipoCabania tipo = FindByName.FindOne(nombre);
+        //        return View(tipo);
+        //    }
+        //    catch (LoginIncorrectoException ex)
+        //    {
+        //        TempData["Error"] = "Es necesario iniciar sesion";
+        //        return RedirectToAction("Login", "Usuario");
+        //    }
+        //    catch (NoEncontradoException ex) {
+        //        TempData["Error"] = "No se encontro el Tipo";
+        //        return RedirectToAction(nameof(FindOne), new { accion = "Detalle" });
+        //    }
 
-            catch (Exception ex)
-            {
-                TempData["Error"] = ex.Message;
-                return View();
-            }
-        }
+        //    catch (Exception ex)
+        //    {
+        //        TempData["Error"] = ex.Message;
+        //        return View();
+        //    }
+        //}
 
         // GET: TipoCabaniaController/Create
         public ActionResult Create()
@@ -202,31 +202,31 @@ namespace PresentacionMVC.Controllers
         //}
 
         // GET: TipoCabaniaController/Delete/5
-        public ActionResult Delete(string nombre)
-        {
-            try
-            {
-                string userEmail = HttpContext.Session.GetString("user");
-                ValidarLogin.Validar(userEmail);
-                TipoCabania tipo = FindByName.FindOne(nombre);
-                return View(tipo);
-            }
-            catch (NoEncontradoException ex)
-            {
-                TempData["Error"] = ex.Message;
-                return View();
-            }
-            catch (LoginIncorrectoException ex)
-            {
-                TempData["Error"] = "Es necesario iniciar sesion";
-                return RedirectToAction("Login", "Usuario");
-            }
-            catch (Exception ex)
-            {
-                TempData["Error"] = ex.Message;
-                return View();
-            }
-        }
+        //public ActionResult Delete(string nombre)
+        //{
+        //    try
+        //    {
+        //        string userEmail = HttpContext.Session.GetString("user");
+        //        ValidarLogin.Validar(userEmail);
+        //        TipoCabania tipo = FindByName.FindOne(nombre);
+        //        return View(tipo);
+        //    }
+        //    catch (NoEncontradoException ex)
+        //    {
+        //        TempData["Error"] = ex.Message;
+        //        return View();
+        //    }
+        //    catch (LoginIncorrectoException ex)
+        //    {
+        //        TempData["Error"] = "Es necesario iniciar sesion";
+        //        return RedirectToAction("Login", "Usuario");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        TempData["Error"] = ex.Message;
+        //        return View();
+        //    }
+        //}
 
         // POST: TipoCabaniaController/Delete/5
         [HttpPost]
@@ -288,34 +288,34 @@ namespace PresentacionMVC.Controllers
         }
 
         // POST: TipoCabaniaController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(string nombre, TipoCabania tipoEditado)
-        {
-            try
-            {
-                string userEmail = HttpContext.Session.GetString("user");
-                ValidarLogin.Validar(userEmail);
-                TipoCabania tipo = FindByName.FindOne(nombre);
-                tipo.Costo = tipoEditado.Costo;
-                tipo.Descripcion = tipoEditado.Descripcion;
-                Parametro param = ObtenerMaxMin.ObtenerMaxMinDescripcion("Tipo");
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit(string nombre, TipoCabania tipoEditado)
+        //{
+        //    try
+        //    {
+        //        string userEmail = HttpContext.Session.GetString("user");
+        //        ValidarLogin.Validar(userEmail);
+        //        TipoCabania tipo = FindByName.FindOne(nombre);
+        //        tipo.Costo = tipoEditado.Costo;
+        //        tipo.Descripcion = tipoEditado.Descripcion;
+        //        Parametro param = ObtenerMaxMin.ObtenerMaxMinDescripcion("Tipo");
 
-                tipo.Validar();
-                UpdateTipo.Update(tipo);
-                return RedirectToAction(nameof(Index));
-            }
-            catch (LoginIncorrectoException ex)
-            {
-                TempData["Error"] = "Es necesario iniciar sesion";
-                return RedirectToAction("Login", "Usuario");
-            }
-            catch (Exception ex)
-            {
-                TempData["Error"] = ex.Message;
-                return View();
-            }
-        }
+        //        tipo.Validar();
+        //        UpdateTipo.Update(tipo);
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch (LoginIncorrectoException ex)
+        //    {
+        //        TempData["Error"] = "Es necesario iniciar sesion";
+        //        return RedirectToAction("Login", "Usuario");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        TempData["Error"] = ex.Message;
+        //        return View();
+        //    }
+        //}
 
     }
 }

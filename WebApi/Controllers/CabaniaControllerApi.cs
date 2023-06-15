@@ -41,6 +41,13 @@ namespace WebApi.Controllers
             FindTipoById =findByIdTipo;
             FiltroPrecio = filtroPrecio;
         }
+
+        // GET: api/<CabaniaControllerApi>
+        [HttpGet("health")]
+        public IActionResult GetHealth() //FINDALL
+        {
+            return Ok(true);
+        }
         // GET: api/<CabaniaControllerApi>
         [HttpGet("index", Name = "Index")]
         public IActionResult Get() //FINDALL

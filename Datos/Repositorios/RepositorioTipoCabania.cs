@@ -46,7 +46,7 @@ namespace Datos.Repositorios
         public void Update(TipoCabania obj)
         {
             obj.Validar();
-            LibreriaContext.TipoCabania.Update(obj);
+            LibreriaContext.Update(obj);
             LibreriaContext.SaveChanges();
         }
         public TipoCabania FindById(int id)
