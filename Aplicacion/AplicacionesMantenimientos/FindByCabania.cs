@@ -24,7 +24,8 @@ namespace Aplicacion.AplicacionesMantenimientos
                costo = mantenimiento.costo,
                descripcion = mantenimiento.descripcion.Value,
                trabajador = mantenimiento.trabajador,
-               CabaniaId = mantenimiento.CabaniaId
+               CabaniaId = mantenimiento.CabaniaId,
+               Id = mantenimiento.Id
            });
         }
 

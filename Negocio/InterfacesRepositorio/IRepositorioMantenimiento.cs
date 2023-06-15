@@ -14,6 +14,6 @@ namespace Negocio.InterfacesRepositorio
         public void Remove(Mantenimiento mantenimiento);
         public IEnumerable<Mantenimiento> FindByCabania(int id);
 
-        public IEnumerable<Mantenimiento> MantenimientosPorValores(int c1, int c2);
+        public IEnumerable<Mantenimiento> MantenimientosPorValores(int c1, int c2, string nombreEmpleado);
     }
 }

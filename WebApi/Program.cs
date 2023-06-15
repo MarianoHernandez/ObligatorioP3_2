@@ -38,6 +38,7 @@ builder.Services.AddScoped<IListadoMantenimiento, ListadoMantenimiento>();
 builder.Services.AddScoped<IDeleteMantenimiento, DeleteMantenimiento>();
 builder.Services.AddScoped<IFindByDate, FindByDate>();
 builder.Services.AddScoped<IFindByCabania, FindByCabania>();
+builder.Services.AddScoped<IFindByValues, FindByValues>();
 #endregion
 
 

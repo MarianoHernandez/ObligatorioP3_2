@@ -75,9 +75,9 @@ namespace Datos.Repositorios
         {
             IEnumerable<Mantenimiento> lista = Contexto.Mantenimiento
                 .Include(o => o.cabania)
+                .ToList()
                 .Where(man => man.fecha > Fecha1 && man.fecha < Fecha2)
-                .OrderByDescending(cos => cos.costo)
-                .ToList();
+                .OrderByDescending(cos => cos.costo);
 
             return lista;
         }
@@ -89,18 +89,18 @@ namespace Datos.Repositorios
         public IEnumerable<Mantenimiento> FindByCabania(int id) {
             IEnumerable<Mantenimiento> lista = Contexto.Mantenimiento
                 .Include(o => o.cabania)
-                .Where(man => man.cabania.Id == id)
-                .ToList();
+                .ToList()
+                .Where(man => man.cabania.Id == id);
 
             return lista;
         }
 
-        public IEnumerable<Mantenimiento> MantenimientosPorValores(int c1, int c2)
+        public IEnumerable<Mantenimiento> MantenimientosPorValores(int c1, int c2, string nombreEmpleado)
         {
             IEnumerable<Mantenimiento> lista = Contexto.Mantenimiento
-                .Include(nom => nom.trabajador)
+                .ToList()
                 .Where(cos => cos.costo >= c1 && cos.costo <= c2)
-                .ToList();
+                .Where(nom => nom.trabajador == nombreEmpleado);
                 return lista;
         }
     }
