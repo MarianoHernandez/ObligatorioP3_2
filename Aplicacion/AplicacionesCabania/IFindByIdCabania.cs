@@ -1,4 +1,5 @@
-﻿using Negocio.Entidades;
+﻿using DTOs;
+using Negocio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Aplicacion.AplicacionesCabania
 {
     public interface IFindByIdCabania
     {
-        public Cabania FindById(int id);
+        public CabaniaDTO FindById(int id);
     }
 }

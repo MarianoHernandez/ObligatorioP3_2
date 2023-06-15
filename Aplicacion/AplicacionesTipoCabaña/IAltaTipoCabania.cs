@@ -1,15 +1,9 @@
-﻿using Negocio.Entidades;
-using Negocio.InterfacesRepositorio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DTOs;
 
-namespace Aplicacion.AplicacionesTipoCabaña
+namespace Aplicacion.AplicacionesTipoCabania
 {
     public interface IAltaTipoCabania
     {
-        public void Alta(TipoCabania tipoCabania);
+        public void Alta(TipoCabaniaDTO tipoCabania);
     }
 }

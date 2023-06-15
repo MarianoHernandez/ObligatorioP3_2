@@ -1,4 +1,4 @@
-﻿using Aplicacion.AplicacionesTipoCabaña;
+﻿using Aplicacion.AplicacionesTipoCabania;
 using Aplicacion.AplicacionesUsuario;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

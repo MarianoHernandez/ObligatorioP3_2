@@ -14,17 +14,25 @@ namespace Aplicacion.AplicacionesCabania
 
         public IEnumerable<CabaniaDTO> ListadoAllCabania()
         {
-            return RepositorioCabania.FindAll().Select(cabania => new CabaniaDTO()
+            return RepositorioCabania.FindAll().Select(cab => new CabaniaDTO()
             {
-                Nombre = cabania.Nombre.Value,
-                Id = cabania.Id,
-                Descripcion = cabania.Descripcion.Value,
-                TipoCabaniaId = cabania.TipoCabaniaId,
-                Jacuzzi = cabania.Jacuzzi,
-                Habilitada = cabania.Habilitada,
-                CantidadPersonas = cabania.CantidadPersonas,
-                Foto = cabania.Foto,
-            }); ;
+                Id = cab.Id,
+                Nombre = cab.Nombre.Value,
+                TipoCabaniaId = cab.TipoCabaniaId,
+                Descripcion = cab.Descripcion.Value,
+                Jacuzzi = cab.Jacuzzi,
+                Habilitada = cab.Habilitada,
+                CantidadPersonas = cab.CantidadPersonas,
+                Foto = cab.Foto,
+                TipoCabaniaDTO = new TipoCabaniaDTO()
+                {
+                    Id = cab.TipoCabania.Id,
+                    Nombre = cab.TipoCabania.Nombre,
+                    Descripcion = cab.TipoCabania.Descripcion.Value,
+                    Costo = cab.TipoCabania.Costo
+                }
+
+            });
         }
     }
 }

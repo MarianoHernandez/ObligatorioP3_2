@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DTOs;
+﻿using DTOs;
 using Negocio.InterfacesRepositorio;
 
 namespace Aplicacion.AplicacionesMantenimientos
@@ -30,4 +25,5 @@ namespace Aplicacion.AplicacionesMantenimientos
         }
 
     }
+}
 }

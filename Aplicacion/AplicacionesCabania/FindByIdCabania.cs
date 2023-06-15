@@ -1,4 +1,5 @@
-﻿using Negocio.Entidades;
+﻿using DTOs;
+using Negocio.Entidades;
 using Negocio.InterfacesRepositorio;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,36 @@ namespace Aplicacion.AplicacionesCabania
         }
 
 
-        public Cabania FindById(int id)
+        public CabaniaDTO FindById(int id)
         {
-            return RepositorioCabania.FindById(id);
+            Cabania cab = RepositorioCabania.FindById(id);
+            if (cab != null && cab is Cabania)
+            {
+                return new CabaniaDTO()
+                {
+                    Id = cab.Id,
+                    Nombre = cab.Nombre.Value,
+                    TipoCabaniaId = cab.TipoCabaniaId,
+                    Descripcion = cab.Descripcion.Value,
+                    Jacuzzi = cab.Jacuzzi,
+                    Habilitada = cab.Habilitada,
+                    CantidadPersonas = cab.CantidadPersonas,
+                    Foto = cab.Foto,
+                    TipoCabaniaDTO = new TipoCabaniaDTO()
+                    {
+                        Id = cab.TipoCabania.Id,
+                        Nombre = cab.TipoCabania.Nombre,
+                        Descripcion = cab.TipoCabania.Descripcion.Value,
+                        Costo = cab.TipoCabania.Costo
+                    }
+                };
+            }
+            else
+            {
+                return null;
+            }
+
         }
     }
 }
+

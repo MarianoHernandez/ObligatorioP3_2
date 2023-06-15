@@ -1,5 +1,5 @@
 ﻿using Aplicacion.AplicacionesCabania;
-using Aplicacion.AplicacionesTipoCabaña;
+using Aplicacion.AplicacionesTipoCabania;
 using Aplicacion.AplicacionesUsuario;
 using Aplicacion.AplicacionParametros;
 using DTOs;
@@ -19,11 +19,9 @@ namespace WebApi.Controllers
     public class CabaniaControllerApi : ControllerBase
     {
         IAltaCabania AltaCabania { get; set; }
-        IListadoTipoCabania ListadoTipoCabania { get; set; }
         IListadoCabania ListadoCabania { get; set; }
         IBusquedaConFiltros BusquedaConFiltros { get; set; }
         IFindByIdCabania FindByIdCabania { get; set; }
-        IObtenerMaxMinDescripcion ObtenerMaxMin { get; set; }
         IFindByIdTipo FindTipoById {get; set;}
         IFiltroPrecio FiltroPrecio { get; set; }
 
@@ -31,14 +29,12 @@ namespace WebApi.Controllers
             IFindByIdTipo findByIdTipo,
             IAltaCabania altaCabania, 
             IFindByIdCabania findByIdCabania, 
-            IListadoTipoCabania listadoTipoCabania, 
             IListadoCabania listadoCabania, 
             IBusquedaConFiltros busquedaConFiltros,
             IFiltroPrecio filtroPrecio)
         {
             
             AltaCabania = altaCabania;
-            ListadoTipoCabania = listadoTipoCabania;
             ListadoCabania = listadoCabania;
             BusquedaConFiltros = busquedaConFiltros;
             FindByIdCabania = findByIdCabania;
@@ -60,7 +56,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                Cabania cab = FindByIdCabania.FindById(id);
+                CabaniaDTO cab = FindByIdCabania.FindById(id);
                 return Ok(cab);
             }
             catch (NoEncontradoException ex)

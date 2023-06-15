@@ -1,28 +1,39 @@
 ﻿using Aplicacion.AplicacionParametros;
+using DTOs;
 using Negocio.Entidades;
 using Negocio.EntidadesAuxiliares;
 using Negocio.InterfacesRepositorio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Negocio.ValueObjects;
 
-namespace Aplicacion.AplicacionesTipoCabaña
+namespace Aplicacion.AplicacionesTipoCabania
 {
     public class AltaTipoCabania : IAltaTipoCabania
     {
         public IRepositorioTipoCabania Repositorio { get; set; }
+        public IObtenerMaxMinDescripcion ObtenerMaxMin { get; set; }
 
-
-        public AltaTipoCabania(IRepositorioTipoCabania repo) { 
+        public AltaTipoCabania(IRepositorioTipoCabania repo, IObtenerMaxMinDescripcion obtenerMaxMin) { 
             Repositorio = repo;
-
+            ObtenerMaxMin = obtenerMaxMin;
         }
 
-        public void Alta(TipoCabania tipoCabania)
+        public void Alta(TipoCabaniaDTO tipoCabania)
         {
-            Repositorio.Add(tipoCabania);
+            Parametro param = ObtenerMaxMin.ObtenerMaxMinDescripcion("Tipo");
+            DescripcionTipoCabania.CantMaxCarNombre = param.ValorMaximo;
+            DescripcionTipoCabania.CantMinCarNombre = param.ValorMinimo;
+
+
+            TipoCabania nuevo = new()
+            {
+                Id = tipoCabania.Id,
+                Descripcion = new DescripcionTipoCabania(tipoCabania.Descripcion),
+                Nombre = tipoCabania.Nombre,
+                Costo = tipoCabania.Costo,
+            };            
+
+            Repositorio.Add(nuevo);
+            tipoCabania.Id = nuevo.Id;
         }
     }
 }

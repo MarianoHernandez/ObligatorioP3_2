@@ -1,6 +1,6 @@
 ﻿using Negocio.Entidades;
 
-namespace Aplicacion.AplicacionesTipoCabaña
+namespace Aplicacion.AplicacionesTipoCabania
 {
     public interface IFindByIdTipo
     {
