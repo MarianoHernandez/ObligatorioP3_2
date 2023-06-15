@@ -42,14 +42,14 @@ namespace WebApi.Controllers
         }
 
         // GET api/<MantenimientoController>/5
-        [HttpGet("{id}", Name = "FindById")]
-        public IActionResult Get(int id)
+        [HttpGet("{idCabania}", Name = "FindById")]
+        public IActionResult Get(int idCabania)
         {
-            if (id <= 0) return BadRequest("El id proporcionado no es válido");
+            if (idCabania <= 0) return BadRequest("El id proporcionado no es válido");
             try
             {
-                IEnumerable<MantenimientoDTO> mantenimiento = CUfindByCabania.FindMantenimientoByCabania(id);
-                if (mantenimiento == null) return NotFound($"No existe el tema con id: {id}");
+                IEnumerable<MantenimientoDTO> mantenimiento = CUfindByCabania.FindMantenimientoByCabania(idCabania);
+                if (mantenimiento == null) return NotFound($"No existe el tema con id: {idCabania}");
                 return Ok(mantenimiento);
             }
             catch
@@ -70,6 +70,18 @@ namespace WebApi.Controllers
                 CUaltaMantenimiento.Alta(mantenimiento);
             }
             catch (NombreInvalidoException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (CaracteresDentroDeRango ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (MantenimientoInvalidoException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (NoEncontradoException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -101,14 +113,14 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpPost("busquedaPorValores/{costo_1},{costo_2}")]
+        [HttpPost("busquedaPorValores/{c1},{c2},{nombreEmpleado}")]
 
-        public IActionResult MantenimientosPorValores(int c1, int c2)
+        public IActionResult MantenimientosPorValores(int c1, int c2, string nombreEmpleado)
         {
             if (c1 == null || c2 == null) return BadRequest("Los costos no son validas");
             try
             {
-                IEnumerable<MantenimientoDTO> mantenimientos = CUfindByValues.MantenimientosPorValores(c1, c2);
+                IEnumerable<MantenimientoDTO> mantenimientos = CUfindByValues.MantenimientosPorValores(c1, c2, nombreEmpleado);
                 return Ok(mantenimientos);
             }
             catch (MantenimientoInvalidoException ex)

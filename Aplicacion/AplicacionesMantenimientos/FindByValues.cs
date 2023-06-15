@@ -15,19 +15,19 @@ namespace Aplicacion.AplicacionesMantenimientos
         {
             Repo = repo;
         }
-        public IEnumerable<MantenimientoDTO> MantenimientosPorValores(int c1, int c2)
+        public IEnumerable<MantenimientoDTO> MantenimientosPorValores(int c1, int c2, string nombreEmpleado)
         {
 
-            return Repo.MantenimientosPorValores(c1, c2).Select(mantenimiento => new MantenimientoDTO
+            return Repo.MantenimientosPorValores(c1, c2, nombreEmpleado).Select(mantenimiento => new MantenimientoDTO
             {
                 fecha = mantenimiento.fecha,
                 costo = mantenimiento.costo,
                 descripcion = mantenimiento.descripcion.Value,
                 trabajador = mantenimiento.trabajador,
-                CabaniaId = mantenimiento.CabaniaId
+                CabaniaId = mantenimiento.CabaniaId,
+                Id = mantenimiento.Id
             });
         }
 
     }
-}
 }

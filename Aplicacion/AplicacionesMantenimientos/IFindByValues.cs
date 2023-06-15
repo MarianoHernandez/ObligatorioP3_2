@@ -9,6 +9,6 @@ namespace Aplicacion.AplicacionesMantenimientos
 {
     public interface IFindByValues
     {
-        public IEnumerable<MantenimientoDTO> MantenimientosPorValores(int c1, int c2);
+        public IEnumerable<MantenimientoDTO> MantenimientosPorValores(int c1, int c2, string nombreEmpleado);
     }
 }
