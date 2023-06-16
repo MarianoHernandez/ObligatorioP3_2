@@ -9,19 +9,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Negocio.Entidades
 {
-    [Index(nameof(email), IsUnique = true)]
+    [Index(nameof(Email), IsUnique = true)]
     public class Usuario : IValidable
     {
        
-        public string email { get; set; }
-        public string password { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string Rol { get; set; }
         public int Id { get; set; }
 
         public void Validar()
         {
             #region Validar Usuario
 
-            if (string.IsNullOrEmpty(email))
+            if (string.IsNullOrEmpty(Email))
             {
                 throw new CampoVacioException("Los campos no pueden estar vacios");
             }

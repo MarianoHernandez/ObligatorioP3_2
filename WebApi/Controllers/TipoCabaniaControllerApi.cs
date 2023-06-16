@@ -7,6 +7,7 @@ using Negocio.ExcepcionesPropias;
 using Aplicacion.AplicacionesTipoCabania;
 using Aplicacion.AplicacionesUsuario;
 using Aplicacion.AplicacionParametros;
+using Microsoft.AspNetCore.Authorization;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -86,6 +87,7 @@ namespace WebApi.Controllers
 
         // POST api/<ValuesController>
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromBody] TipoCabaniaDTO tipo)
         {
             if (tipo == null) return BadRequest("No se envió informacion del tipo");
@@ -107,6 +109,7 @@ namespace WebApi.Controllers
 
         // PUT api/<ValuesController>/5
         [HttpPut("{nombre}")]
+        [Authorize]
         public IActionResult Put(string nombre, [FromBody] TipoCabaniaDTO? tipo)
         {
             if (nombre == null || tipo == null || tipo.Nombre != nombre) return BadRequest("Los datos proporcionados no son válidos");
@@ -129,6 +132,7 @@ namespace WebApi.Controllers
 
         // DELETE api/<ValuesController>/5
         [HttpDelete("{nombre}",Name = "Borrar")]
+        [Authorize]
         public IActionResult Delete(string nombre)
         {
             try

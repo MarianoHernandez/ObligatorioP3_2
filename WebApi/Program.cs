@@ -5,8 +5,11 @@ using Aplicacion.AplicacionesUsuario;
 using Aplicacion.AplicacionParametros;
 using Datos.Entity;
 using Datos.Repositorios;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Negocio.InterfacesRepositorio;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,28 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+////////////////// JWT ///////////////////////////////////
+var claveSecreta = "ZWRpw6fDo28gZW0gY29tcHV0YWRvcmE="; //PUEDE SER OTRA CLAVE, SI ES FUERTE
+
+builder.Services.AddAuthentication(aut =>
+{
+    aut.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    aut.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(aut =>
+{
+    aut.RequireHttpsMetadata = false;
+    aut.SaveToken = true;
+    aut.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(claveSecreta)),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
+//////////////////// FIN JWT ////////////////////////
 
 //AGREGAR INFORMACIÓN PARA LA INYECCIÓN DE DEPENDENCIAS AUTOMÁTICA:
 builder.Services.AddScoped<IRepositorioTipoCabania, RepositorioTipoCabania>();

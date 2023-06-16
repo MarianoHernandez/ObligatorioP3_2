@@ -3,6 +3,7 @@ using Aplicacion.AplicacionesTipoCabania;
 using Aplicacion.AplicacionesUsuario;
 using Aplicacion.AplicacionParametros;
 using DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Negocio.Entidades;
 using Negocio.ExcepcionesPropias;
@@ -78,6 +79,7 @@ namespace WebApi.Controllers
 
         // POST api/<CabaniaControllerApi>
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromBody] CabaniaDTO? cabania)
         {
             if (cabania == null) return BadRequest("No se envió información de cabania");
