@@ -47,8 +47,9 @@ namespace Datos.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    email = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rol = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -106,9 +107,7 @@ namespace Datos.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Cabania_Descripcion_Value",
                 table: "Cabania",
-                column: "Descripcion_Value",
-                unique: true,
-                filter: "[Descripcion_Value] IS NOT NULL");
+                column: "Descripcion_Value");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cabania_Nombre_Value",
@@ -130,8 +129,7 @@ namespace Datos.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Mantenimiento_descripcion_Value",
                 table: "Mantenimiento",
-                column: "descripcion_Value",
-                unique: true);
+                column: "descripcion_Value");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Parametro_Nombre",
@@ -142,8 +140,7 @@ namespace Datos.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_TipoCabania_Descripcion_Value",
                 table: "TipoCabania",
-                column: "Descripcion_Value",
-                unique: true);
+                column: "Descripcion_Value");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TipoCabania_Nombre",
@@ -152,9 +149,9 @@ namespace Datos.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Usuario_email",
+                name: "IX_Usuario_Email",
                 table: "Usuario",
-                column: "email",
+                column: "Email",
                 unique: true);
         }
 

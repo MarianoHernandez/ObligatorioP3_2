@@ -112,17 +112,21 @@ namespace Datos.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("email")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("password")
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rol")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("email")
+                    b.HasIndex("Email")
                         .IsUnique();
 
                     b.ToTable("Usuario");
@@ -173,9 +177,7 @@ namespace Datos.Migrations
 
                             b1.HasKey("CabaniaId");
 
-                            b1.HasIndex("Value")
-                                .IsUnique()
-                                .HasFilter("[Descripcion_Value] IS NOT NULL");
+                            b1.HasIndex("Value");
 
                             b1.ToTable("Cabania");
 
@@ -230,8 +232,7 @@ namespace Datos.Migrations
 
                             b1.HasKey("MantenimientoId");
 
-                            b1.HasIndex("Value")
-                                .IsUnique();
+                            b1.HasIndex("Value");
 
                             b1.ToTable("Mantenimiento");
 
@@ -258,8 +259,7 @@ namespace Datos.Migrations
 
                             b1.HasKey("TipoCabaniaId");
 
-                            b1.HasIndex("Value")
-                                .IsUnique();
+                            b1.HasIndex("Value");
 
                             b1.ToTable("TipoCabania");
 

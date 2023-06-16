@@ -1,4 +1,5 @@
-﻿using Negocio.Entidades;
+﻿using DTOs;
+using Negocio.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Aplicacion.AplicacionesUsuario
 {
     public interface ILoginUsuario
     {
-        public Usuario Login(Usuario usuario);
+        public UsuarioDTO Login(string email, string pass);
     }
 }

@@ -1,13 +1,13 @@
 ﻿using Aplicacion.AplicacionesTipoCabania;
 using Aplicacion.AplicacionesUsuario;
+using DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Negocio.Entidades;
 using Negocio.ExcepcionesPropias;
 using Negocio.InterfacesRepositorio;
 using System.Net;
-
-
+using WebAPI;
 
 namespace PresentacionMVC.Controllers
 {
@@ -45,28 +45,13 @@ namespace PresentacionMVC.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public IActionResult Login(Usuario usuario)
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] UsuarioDTO usuario)
         {
-            try
-            {
-                LoginUsuario.Login(usuario);
-                HttpContext.Session.SetString("user", usuario.email);
-                TempData["Bien"] = "Se inicio sesión correctamente";
-                return RedirectToAction("Index", "Cabania");
-            }
-             catch (LoginIncorrectoException ex)
-            {
-                TempData["Error"] = ex.Message;
-                return View();
-            }
-            catch (Exception ex)
-            {
-                TempData["Error"] =ex.Message;
-                return View();
-            }
+            UsuarioDTO logueado = LoginUsuario.Login(usuario.Email, usuario.Password);
+            if (logueado == null) return Unauthorized("El usuario o la contraseña no son correctos");
+            return Ok(new DTOLogin() { Rol = logueado.Rol, TokenJWT = ManejadorJWT.GenerarToken(logueado) });
         }
-
         // GET: UsuarioController/Details/5
         public ActionResult Details(int id)
         {

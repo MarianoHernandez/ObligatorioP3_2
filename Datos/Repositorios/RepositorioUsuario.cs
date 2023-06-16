@@ -47,11 +47,11 @@ namespace Datos.Repositorios
             throw new NotImplementedException();
         }
 
-        public Usuario Login(Usuario usuario)
+        public Usuario Login(string email, string pass)
         {
             
            Usuario encontrado = Contexto.Usuario
-                            .Where(usu => usu.email == usuario.email && usu.password == usuario.password)
+                            .Where(usu => usu.Email == email && usu.Password == pass)
                             .SingleOrDefault();
             if(encontrado == null)
             {

@@ -1,4 +1,5 @@
-﻿using Negocio.Entidades;
+﻿using DTOs;
+using Negocio.Entidades;
 using Negocio.InterfacesRepositorio;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,22 @@ namespace Aplicacion.AplicacionesUsuario
             Repo = repo;
         }
 
-        public Usuario Login(Usuario login)
+        public UsuarioDTO Login(string email, string pass)
         {
-            return Repo.Login(login);
+            UsuarioDTO dto = null;
+            Usuario usu = Repo.Login(email, pass);
+
+            if (usu != null)
+            {
+                dto = new UsuarioDTO()
+                {
+                    Id = usu.Id,
+                    Email = usu.Email,
+                    Password = usu.Password,
+                    Rol = usu.Rol
+                };
+            }
+            return dto;
         }
     }
 }
