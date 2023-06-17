@@ -8,6 +8,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using Aplicacion.AplicacionesCabania;
 using Negocio.Entidades;
 using Negocio.ExcepcionesPropias.Cabanias;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -60,6 +61,7 @@ namespace WebApi.Controllers
 
         // POST api/<MantenimientoController>
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromBody] MantenimientoDTO? mantenimiento)
         {
 
@@ -93,13 +95,16 @@ namespace WebApi.Controllers
             return CreatedAtRoute("FindById", new { id = mantenimiento.Id }, mantenimiento);
         }
 
-        [HttpPost("busquedaPorFecha/{f1},{f2}")]
-        public IActionResult FindByDate(DateTime f1, DateTime f2)
+        [HttpGet("busquedaPorFecha")]
+        [Authorize]
+        public IActionResult FindByDate([FromQuery] string f1, string f2)
         {
             if (f1 == null || f2 == null) return BadRequest("Las fechas no son validas");
             try
             {
-                IEnumerable<MantenimientoDTO> mantenimientos = CUfindByDate.FindByDateMantenimiento(f1, f2);
+                DateTime dateTime = DateTime.Parse(f1);
+                DateTime dateTime2 = DateTime.Parse(f2);
+                IEnumerable<MantenimientoDTO> mantenimientos = CUfindByDate.FindByDateMantenimiento(dateTime, dateTime2);
                 return Ok(mantenimientos);
             }
             catch (MantenimientoInvalidoException ex)
@@ -113,9 +118,9 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpPost("busquedaPorValores/{c1},{c2},{nombreEmpleado}")]
-
-        public IActionResult MantenimientosPorValores(int c1, int c2, string nombreEmpleado)
+        [HttpPost("busquedaPorValores")]
+        [Authorize]
+        public IActionResult MantenimientosPorValores([FromQuery] int c1, int c2, string nombreEmpleado)
         {
             if (c1 == null || c2 == null) return BadRequest("Los costos no son validas");
             try
@@ -134,19 +139,6 @@ namespace WebApi.Controllers
             }
         }
 
-        //// PUT api/<MantenimientoController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] MantenimientoDTO? mantenimiento)
-        //{
-        //    return View();
-        //}
-
-        ////DELETE api/<MantenimientoController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //    return View();
-        //}
     }
 
 }
