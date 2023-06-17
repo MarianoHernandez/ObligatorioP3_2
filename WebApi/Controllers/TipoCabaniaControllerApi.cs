@@ -15,7 +15,7 @@ using Microsoft.Data.SqlClient;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/TipoCabania")]
     [ApiController]
     public class TipoCabaniaControllerApi : ControllerBase
     {
