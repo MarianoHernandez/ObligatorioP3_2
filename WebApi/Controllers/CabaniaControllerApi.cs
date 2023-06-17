@@ -101,7 +101,7 @@ namespace WebApi.Controllers
                 return StatusCode(500, ex.Message);
             }
 
-            return Ok( cabania);
+            return Ok(cabania);
         }
 
         // GET api/<CabaniaControllerApi>

@@ -107,7 +107,17 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V2");
+
+        // Configuración personalizada para el botón de autorización
+        c.ConfigObject.AdditionalItems["bearerFormat"] = "Bearer {token}";
+        c.ConfigObject.AdditionalItems["tokenUrl"] = "/login"; // Ruta a tu endpoint para obtener el token
+        c.ConfigObject.AdditionalItems["clientSecret"] = claveSecreta;
+        c.ConfigObject.AdditionalItems["appName"] = "Your App Name";
+        c.ConfigObject.AdditionalItems["scopes"] = "your-scopes";
+    });
 }
 
 app.UseAuthorization();

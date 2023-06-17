@@ -1,5 +1,7 @@
 ﻿using Datos.Entity;
+using Negocio.Entidades;
 using Negocio.EntidadesAuxiliares;
+using Negocio.ExcepcionesPropias;
 using Negocio.InterfacesRepositorio;
 using System;
 using System.Collections.Generic;
@@ -20,7 +22,8 @@ namespace Datos.Repositorios
 
         public Parametro ObtenerParametros(string nombre)
         {
-            return LibreriaContext.Parametro.Where(par => par.Nombre == nombre).SingleOrDefault();
+            Parametro par = LibreriaContext.Parametro.SingleOrDefault(par => par.Nombre == nombre);
+            return par == null ? throw new NoEncontradoException("No se encontro el parametro para el maximo y el minimo") : par;
         }
 
         public Parametro ObtenerParametrosTipo()

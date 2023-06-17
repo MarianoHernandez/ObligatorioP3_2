@@ -8,6 +8,7 @@ using Aplicacion.AplicacionesTipoCabania;
 using Aplicacion.AplicacionesUsuario;
 using Aplicacion.AplicacionParametros;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Data.SqlClient;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -99,8 +100,21 @@ namespace WebApi.Controllers
             {
                 return BadRequest(ex.Message);
             }
+            catch (NoEncontradoException ex)
+            {
+                return StatusCode(501,ex.Message);
+            }
             catch (Exception ex)
             {
+                if (ex.InnerException is SqlException)
+                {
+                    SqlException sql = (SqlException)ex.InnerException;
+                    if (sql.Number == 2601)
+                    {
+                        return BadRequest("Nombre Duplicado");
+                    }
+
+                }
                 return StatusCode(500, ex.Message);
             }
 
@@ -123,6 +137,15 @@ namespace WebApi.Controllers
             }
             catch(Exception ex)
             {
+                if (ex.InnerException is SqlException)
+                {
+                    SqlException sql = (SqlException)ex.InnerException;
+                    if (sql.Number == 2601)
+                    {
+                        return BadRequest("Nombre Duplicado");
+                    }
+
+                }
                 return StatusCode(500, ex.Message);
             }
 
@@ -148,7 +171,8 @@ namespace WebApi.Controllers
                 return NotFound(ex.Message);
             }
             catch (Exception ex)
-            {
+            { 
+
 
                 return StatusCode(500, ex.Message);
             }
