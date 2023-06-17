@@ -12,6 +12,6 @@ namespace Negocio.InterfacesRepositorio
     {
         IEnumerable<Cabania> FindCabaña(string? nombre, int? tipo, int? cantidadPers, bool? habilitada);
         IEnumerable<Cabania>  FindCabañaTipo(string nombre);
-        IEnumerable<Cabania> FindPrecio(decimal valor, int tipoId);
+        IEnumerable<Cabania> FindPrecio(decimal valor);
     }
 }

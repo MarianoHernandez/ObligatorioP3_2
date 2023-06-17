@@ -1,27 +1,37 @@
-﻿using Negocio.EntidadesAuxiliares;
+﻿using Negocio.Entidades;
+using Negocio.EntidadesAuxiliares;
 using Negocio.InterfacesRepositorio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Negocio.ValueObjects;
+using PresentacionMVC.DTOs;
+
 
 namespace Aplicacion.AplicacionParametros
 {
     public class UpdateParametro :IUpdateParametro
     {
-
+        public IObtenerMaxMinDescripcion ObtenerMaxMin { get; set; }
         public IRepositorioParametros Repo { get; set; }
-        public UpdateParametro(IRepositorioParametros repo)
-        {
 
+        public UpdateParametro(IRepositorioParametros repo, IObtenerMaxMinDescripcion obtenerMaxMin)
+        {
+            ObtenerMaxMin = obtenerMaxMin;
             Repo = repo;
         }
 
 
-        public void Update(Parametro param)
+        public void Update(DTOParametro param)
         {
-            Repo.Update(param);
+            Parametro parametro = ObtenerMaxMin.ObtenerMaxMinDescripcion(param.Nombre);
+
+            Parametro aModificar = new()
+            {
+                Id = parametro.Id,
+                Nombre = param.Nombre,
+                ValorMaximo = param.ValorMaximo,
+                ValorMinimo = param.ValorMinimo,
+            };
+
+            Repo.Update(aModificar);
         }
     }
 }

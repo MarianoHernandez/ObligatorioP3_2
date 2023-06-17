@@ -26,10 +26,21 @@ namespace Datos.Repositorios
             return par == null ? throw new NoEncontradoException("No se encontro el parametro para el maximo y el minimo") : par;
         }
 
-        public Parametro ObtenerParametrosTipo()
+        public void Update(Parametro obj)
         {
-            throw new NotImplementedException();
+            obj.Validar();
+            Parametro actualizar = ObtenerParametros(obj.Nombre);
+            if (actualizar == null)
+            {
+                throw new Exception("No se encontro a que elemento quiere cambiarle el ladrgo de la descripcion");
+            }
+            actualizar.ValorMinimo = obj.ValorMinimo ;
+            actualizar.ValorMaximo = obj.ValorMaximo ;
+            actualizar.Validar();
+            LibreriaContext.Parametro.Update(actualizar);
+            LibreriaContext.SaveChanges();
         }
+        #region NotImplementes
 
         public void Add(Parametro obj)
         {
@@ -50,20 +61,6 @@ namespace Datos.Repositorios
         {
             throw new NotImplementedException();
         }
-
-        public void Update(Parametro obj)
-        {
-            obj.Validar();
-            Parametro actualizar = ObtenerParametros(obj.Nombre);
-            if (actualizar == null)
-            {
-                throw new Exception("No se encontro a que elemento quiere cambiarle el ladrgo de la descripcion");
-            }
-            actualizar.ValorMinimo = obj.ValorMinimo ;
-            actualizar.ValorMaximo = obj.ValorMaximo ;
-            actualizar.Validar();
-            LibreriaContext.Parametro.Update(actualizar);
-            LibreriaContext.SaveChanges();
-        }
+        #endregion
     }
 }

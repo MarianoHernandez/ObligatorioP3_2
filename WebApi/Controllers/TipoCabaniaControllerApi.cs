@@ -105,7 +105,8 @@ namespace WebApi.Controllers
                 return StatusCode(501,ex.Message);
             }
             catch (Exception ex)
-            {                if (ex.InnerException is SqlException)
+            {               
+                if (ex.InnerException is SqlException)
                 {
                     SqlException sql = (SqlException)ex.InnerException;
                     if (sql.Number == 2601)

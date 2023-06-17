@@ -10,7 +10,7 @@ namespace Aplicacion.AplicacionesCabania
 {
     public interface IFiltroPrecio
     {
-        IEnumerable<CabaniaDTO> Filtro(decimal valor, int tipoId);
+        IEnumerable<CabaniaDTO> Filtro(decimal valor);
 
     }
 }

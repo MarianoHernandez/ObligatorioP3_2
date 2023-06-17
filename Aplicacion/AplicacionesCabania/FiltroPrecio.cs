@@ -24,10 +24,10 @@ namespace Aplicacion.AplicacionesCabania
         }
 
 
-        public IEnumerable<CabaniaDTO> Filtro(decimal valor, int tipoId)
+        public IEnumerable<CabaniaDTO> Filtro(decimal valor)
         {
 
-            return Repo.FindPrecio(valor, tipoId).Select(cabania => new CabaniaDTO()
+            return Repo.FindPrecio(valor).Select(cabania => new CabaniaDTO()
             {
                 Nombre = cabania.Nombre.Value,
                 CantidadPersonas = cabania.CantidadPersonas,
