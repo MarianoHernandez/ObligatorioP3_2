@@ -113,12 +113,12 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("PrecioFiltro")]
-        public IActionResult PrecioFiltradas([FromQuery] decimal valor)
+        public IActionResult PrecioFiltradas([FromQuery] decimal costo, int tipoId)
         {
-            if (valor == null) return BadRequest("No se envió información de cabania");
+            if (costo == null) return BadRequest("No se envió información de cabania");
             try
             {
-                IEnumerable<CabaniaDTO> filtradas = FiltroPrecio.Filtro(valor);
+                IEnumerable<CabaniaDTO> filtradas = FiltroPrecio.Filtro(costo, tipoId);
                 return Ok(filtradas);
             }
             catch (NombreInvalidoException ex)

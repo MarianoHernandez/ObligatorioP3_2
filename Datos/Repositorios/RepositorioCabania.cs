@@ -78,9 +78,9 @@ namespace Datos.Repositorios
 
         }
 
-        public IEnumerable<Cabania> FindPrecio(decimal valor) {
+        public IEnumerable<Cabania> FindPrecio(decimal valor,int tipoId) {
             IEnumerable<Cabania> lista = LibreriaContext.Cabania.Include(o => o.TipoCabania).ToList();
-            lista = lista.Where(cab => cab.Habilitada && cab.Jacuzzi && cab.TipoCabania.Costo < valor) ;
+            lista = lista.Where(cab => cab.Habilitada && cab.Jacuzzi && cab.TipoCabania.Costo < valor && cab.TipoCabania.Id == tipoId) ;
             return lista.ToList();
         }
     }
