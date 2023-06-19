@@ -118,7 +118,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpPost("busquedaPorValores")]
+        [HttpGet("busquedaPorValores")]
         [Authorize]
         public IActionResult MantenimientosPorValores([FromQuery] int c1, int c2, string nombreEmpleado)
         {
