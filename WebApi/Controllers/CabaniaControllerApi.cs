@@ -5,6 +5,7 @@ using Aplicacion.AplicacionParametros;
 using DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Negocio.Entidades;
 using Negocio.ExcepcionesPropias;
 using Negocio.ExcepcionesPropias.Cabanias;
@@ -98,6 +99,15 @@ namespace WebApi.Controllers
             }
             catch (Exception ex)
             {
+                if (ex.InnerException is SqlException)
+                {
+                    SqlException sql = (SqlException)ex.InnerException;
+                    if (sql.Number == 2601)
+                    {
+                        return BadRequest("El nombre ingresado ya existe.");
+                    }
+
+                }
                 return StatusCode(500, ex.Message);
             }
 

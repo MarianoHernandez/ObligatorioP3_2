@@ -111,7 +111,7 @@ namespace WebApi.Controllers
                     SqlException sql = (SqlException)ex.InnerException;
                     if (sql.Number == 2601)
                     {
-                        return BadRequest("Nombre Duplicado");
+                        return BadRequest("El nombre ingresado ya existe.");
                     }
 
                 }
