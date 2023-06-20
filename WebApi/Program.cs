@@ -18,7 +18,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options => options.IncludeXmlComments("WebAPI.xml"));
 
 ////////////////// JWT ///////////////////////////////////
 var claveSecreta = "ZWRpw6fDo28gZW0gY29tcHV0YWRvcmE="; //PUEDE SER OTRA CLAVE, SI ES FUERTE
@@ -107,17 +107,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V2");
-
-        // Configuración personalizada para el botón de autorización
-        c.ConfigObject.AdditionalItems["bearerFormat"] = "Bearer {token}";
-        c.ConfigObject.AdditionalItems["tokenUrl"] = "/login"; // Ruta a tu endpoint para obtener el token
-        c.ConfigObject.AdditionalItems["clientSecret"] = claveSecreta;
-        c.ConfigObject.AdditionalItems["appName"] = "Your App Name";
-        c.ConfigObject.AdditionalItems["scopes"] = "your-scopes";
-    });
+    app.UseSwaggerUI();
 }
 
 app.UseAuthorization();

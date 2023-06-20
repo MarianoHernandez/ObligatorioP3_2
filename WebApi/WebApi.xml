@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebAPI</name>
+    </assembly>
+    <members>
+        <member name="M:WebAPI.Controllers.CabaniaControllerApi.PrecioFiltro(System.String)">
+            <summary>
+            Permite buscar temas que contengan un caracter como inicial de su nombre
+            </summary>
+            <param name="caracter">El caracter inical en el nombre de los temas buscados</param>
+            <returns>Retorna los temas cuyo nombre empieza con el caracter dado</returns>
+        </member>
+    </members>
+</doc>

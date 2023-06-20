@@ -43,14 +43,14 @@ namespace WebApi.Controllers
         }
 
         // GET api/<MantenimientoController>/5
-        [HttpGet("{idCabania}", Name = "FindById")]
-        public IActionResult Get(int idCabania)
+        [HttpGet("{id}", Name = "FindById")]
+        public IActionResult Get(int id)
         {
-            if (idCabania <= 0) return BadRequest("El id proporcionado no es válido");
+            if (id <= 0) return BadRequest("El id proporcionado no es válido");
             try
             {
-                IEnumerable<MantenimientoDTO> mantenimiento = CUfindByCabania.FindMantenimientoByCabania(idCabania);
-                if (mantenimiento == null) return NotFound($"No existe el tema con id: {idCabania}");
+                IEnumerable<MantenimientoDTO> mantenimiento = CUfindByCabania.FindMantenimientoByCabania(id);
+                if (mantenimiento == null) return NotFound($"No existe el tema con id: {id}");
                 return Ok(mantenimiento);
             }
             catch
@@ -85,18 +85,17 @@ namespace WebApi.Controllers
             }
             catch (NoEncontradoException ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(ex.Message);
             }
             catch
             {
                 return StatusCode(500, "Ocurrión un error, no se pudo realizar el alta.");
             }
 
-            return CreatedAtRoute("FindById", new { id = mantenimiento.Id }, mantenimiento);
+            return CreatedAtRoute("", mantenimiento);
         }
 
         [HttpGet("busquedaPorFecha")]
-        [Authorize]
         public IActionResult FindByDate([FromQuery] string f1, string f2)
         {
             if (f1 == null || f2 == null) return BadRequest("Las fechas no son validas");
@@ -119,7 +118,6 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("busquedaPorValores")]
-        [Authorize]
         public IActionResult MantenimientosPorValores([FromQuery] int c1, int c2, string nombreEmpleado)
         {
             if (c1 == null || c2 == null) return BadRequest("Los costos no son validas");

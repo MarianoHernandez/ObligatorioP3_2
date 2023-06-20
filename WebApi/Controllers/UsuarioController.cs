@@ -48,9 +48,20 @@ namespace PresentacionMVC.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] UsuarioDTO usuario)
         {
-            UsuarioDTO logueado = LoginUsuario.Login(usuario.Email, usuario.Password);
-            if (logueado == null) return Unauthorized("El usuario o la contraseña no son correctos");
-            return Ok(new DTOLogin() { Rol = logueado.Rol, TokenJWT = ManejadorJWT.GenerarToken(logueado) });
+            try
+            {
+
+                UsuarioDTO logueado = LoginUsuario.Login(usuario.Email, usuario.Password);
+                return Ok(new DTOLogin() { Rol = logueado.Rol, TokenJWT = ManejadorJWT.GenerarToken(logueado) });
+            }
+            catch (LoginIncorrectoException ex)
+            {
+                return Unauthorized("El usuario o la contraseña no son correctos");
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
         // GET: UsuarioController/Details/5
         public ActionResult Details(int id)

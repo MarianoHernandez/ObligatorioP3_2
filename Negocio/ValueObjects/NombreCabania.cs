@@ -34,7 +34,7 @@ namespace Negocio.ValueObjects
                 throw new NombreInvalidoException("El nombre no puede ser nulo o vacío");
 
             }
-            if (!Regex.IsMatch(Value, "^[a-zA-Z]+( [a-zA-Z]+)*$"))
+            if (!Regex.IsMatch(Value, "^[a-zA-ZñÑ]+( [a-zA-ZñÑ]+)*$"))
             {
                 throw new NombreInvalidoException("El nombre solo incluye caracteres alfabéticos y espacios embebidos, pero no al principio ni final");
             }
