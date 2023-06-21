@@ -1,15 +1,141 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>WebAPI</name>
+        <name>WebApi</name>
     </assembly>
     <members>
-        <member name="M:WebAPI.Controllers.CabaniaControllerApi.PrecioFiltro(System.String)">
+        <member name="M:WebApi.Controllers.CabaniaControllerApi.Get">
             <summary>
-            Permite buscar temas que contengan un caracter como inicial de su nombre
+            Muestra todas las cabañas
             </summary>
-            <param name="caracter">El caracter inical en el nombre de los temas buscados</param>
-            <returns>Retorna los temas cuyo nombre empieza con el caracter dado</returns>
+            <returns></returns>
+            
+        </member>
+        <member name="M:WebApi.Controllers.CabaniaControllerApi.Get(System.Int32)">
+            <summary>
+            Busca la cabaña por id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.CabaniaControllerApi.Post(DTOs.CabaniaDTO)">
+            <summary>
+            Crea la cabaña
+            </summary>
+            <param name="cabania"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.CabaniaControllerApi.MostrerFiltradas(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean})">
+            <summary>
+            Busca la cabaña filtradas
+            </summary>
+            <param name="Nombre"></param>
+            <param name="TipoID"></param>
+            <param name="CantidadPersonas"></param>
+            <param name="Habilitada"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.CabaniaControllerApi.PrecioFiltradas(System.Decimal)">
+            <summary>
+            Busca la cabaña por costo
+            </summary>
+            <param name="costo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.MantenimientoController.Get">
+            <summary>
+            Muestra todos los mantenimientos
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.MantenimientoController.Get(System.Int32)">
+            <summary>
+            Busca el mantenimiento por el id de la cabaña
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.MantenimientoController.Post(DTOs.MantenimientoDTO)">
+            <summary>
+            Crea el mantenimiento
+            </summary>
+            <param name="mantenimiento"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.MantenimientoController.FindByDate(System.String,System.String)">
+            <summary>
+            Busca mantenimiento entre dos fechas
+            </summary>
+            <param name="f1"></param>
+            <param name="f2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.MantenimientoController.MantenimientosPorValores(System.Int32,System.Int32,System.String)">
+            <summary>
+            Busca el mantenimiento entre dos costos y por empleado
+            </summary>
+            <param name="c1"></param>
+            <param name="c2"></param>
+            <param name="nombreEmpleado"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.ParametrosControllerApi.Get(System.String)">
+            <summary>
+            Ingresa el parametro
+            </summary>
+            <param name="nombre"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.ParametrosControllerApi.Put(System.String,PresentacionMVC.DTOs.DTOParametro)">
+            <summary>
+            Modifica ese parametro
+            </summary>
+            <param name="nombre"></param>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TipoCabaniaControllerApi.Get">
+            <summary>
+            Muestra todos los tipos de cabaña
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TipoCabaniaControllerApi.GetNombre(System.String)">
+            <summary>
+            Busca el tipo de cabaña por el nombre
+            </summary>
+            <param name="nombre"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TipoCabaniaControllerApi.Get(System.Int32)">
+            <summary>
+            Busca el tipo de cabaña por el id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TipoCabaniaControllerApi.Post(DTOs.TipoCabaniaDTO)">
+            <summary>
+            Crea el tipo de cabaña
+            </summary>
+            <param name="tipo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TipoCabaniaControllerApi.Put(System.String,DTOs.TipoCabaniaDTO)">
+            <summary>
+            Modifica el tipo de cabaña
+            </summary>
+            <param name="nombre"></param>
+            <param name="tipo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.TipoCabaniaControllerApi.Delete(System.String)">
+            <summary>
+            Borra el tipo de cabaña
+            </summary>
+            <param name="nombre"></param>
+            <returns></returns>
+            <exception cref="T:Negocio.ExcepcionesPropias.ExisteOtroElementoRelacionado"></exception>
         </member>
     </members>
 </doc>

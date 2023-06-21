@@ -41,6 +41,8 @@ namespace PresentacionMVC.Controllers
             return RedirectToAction("Login", "Usuario");
         }
 
+
+        
         public IActionResult Login()
         {
             return View();
