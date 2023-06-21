@@ -17,13 +17,11 @@ namespace WebApi.Controllers
     public class ParametrosControllerApi : ControllerBase
     {
         IUpdateParametro UpdateParametro { get; set; }
-        IObtenerMaxMinDescripcion ObtenerMaxMinDescripcion { get; set; }
         public ParametrosControllerApi(
             IUpdateParametro updateParametro,
             IObtenerMaxMinDescripcion obtenerMaxMin
         )
         {
-            ObtenerMaxMinDescripcion = obtenerMaxMin;
             UpdateParametro = updateParametro;
         }
 
