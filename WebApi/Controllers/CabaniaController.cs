@@ -18,7 +18,7 @@ namespace WebApi.Controllers
 
     [Route("api/Cabania")]
     [ApiController]
-    public class CabaniaControllerApi : ControllerBase
+    public class CabaniaController : ControllerBase
     {
         IAltaCabania AltaCabania { get; set; }
         IListadoCabania ListadoCabania { get; set; }
@@ -27,7 +27,7 @@ namespace WebApi.Controllers
         IFindByIdTipo FindTipoById {get; set;}
         IFiltroPrecio FiltroPrecio { get; set; }
 
-        public CabaniaControllerApi(
+        public CabaniaController(
             IFindByIdTipo findByIdTipo,
             IAltaCabania altaCabania, 
             IFindByIdCabania findByIdCabania, 

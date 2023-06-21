@@ -21,7 +21,7 @@ namespace Negocio.Entidades
 {
     [Table("Cabania")]
 
-    public class Cabania : IValidable
+    public class Cabania
     {
         [DisplayName("Numero Habitacion")]
         public int Id { get; set; }
@@ -49,10 +49,5 @@ namespace Negocio.Entidades
 
         public static int largoMinimo = 10;
 
-
-        public void Validar()
-        {
-
-        }
     }
 }

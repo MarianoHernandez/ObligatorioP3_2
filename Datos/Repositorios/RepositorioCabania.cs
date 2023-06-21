@@ -24,7 +24,6 @@ namespace Datos.Repositorios
 
         public void Add( Cabania obj)
         {
-            obj.Validar();
             TipoCabania tipo = TipoCabania.FindById(obj.TipoCabaniaId);
             obj.TipoCabania = tipo;
             LibreriaContext.Cabania.Add(obj);
