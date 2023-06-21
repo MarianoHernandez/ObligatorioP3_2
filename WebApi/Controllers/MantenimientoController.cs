@@ -34,6 +34,11 @@ namespace WebApi.Controllers
             CUfindByValues = cuFindByValues;
         }
 
+        /// <summary>
+        /// Muestra todos los mantenimientos
+        /// </summary>
+        /// <returns></returns>
+
         // GET: api/<MantenimientoController>
         [HttpGet]
         public IActionResult Get()
@@ -41,6 +46,12 @@ namespace WebApi.Controllers
             IEnumerable<MantenimientoDTO> mantenimiento = CUlistadoMantenimiento.ListadoAllMantenimientos();
             return Ok(mantenimiento);
         }
+
+        /// <summary>
+        /// Busca el mantenimiento por el id de la cabaña
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 
         // GET api/<MantenimientoController>/5
         [HttpGet("{id}", Name = "FindById")]
@@ -58,6 +69,13 @@ namespace WebApi.Controllers
                 return StatusCode(500, "Ocurrió un error inesperado");
             }
         }
+
+
+        /// <summary>
+        /// Crea el mantenimiento
+        /// </summary>
+        /// <param name="mantenimiento"></param>
+        /// <returns></returns>
 
         // POST api/<MantenimientoController>
         [HttpPost]
@@ -95,6 +113,14 @@ namespace WebApi.Controllers
             return CreatedAtRoute("", mantenimiento);
         }
 
+
+        /// <summary>
+        /// Busca mantenimiento entre dos fechas
+        /// </summary>
+        /// <param name="f1"></param>
+        /// <param name="f2"></param>
+        /// <returns></returns>
+
         [HttpGet("busquedaPorFecha")]
         public IActionResult FindByDate([FromQuery] string f1, string f2)
         {
@@ -116,6 +142,14 @@ namespace WebApi.Controllers
                 return StatusCode(500, "Ocurrión un error, no se pudo encontrar los mantenimientos.");
             }
         }
+
+        /// <summary>
+        /// Busca el mantenimiento entre dos costos y por empleado
+        /// </summary>
+        /// <param name="c1"></param>
+        /// <param name="c2"></param>
+        /// <param name="nombreEmpleado"></param>
+        /// <returns></returns>
 
         [HttpGet("busquedaPorValores")]
         public IActionResult MantenimientosPorValores([FromQuery] int c1, int c2, string nombreEmpleado)

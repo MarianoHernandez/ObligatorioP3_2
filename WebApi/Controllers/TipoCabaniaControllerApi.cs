@@ -44,12 +44,12 @@ namespace WebApi.Controllers
             FindCabaniaPorTipo = findCabaniaPorTipo;
 
         }
-        // GET: api/<CabaniaControllerApi>
-        [HttpGet("health")]
-        public IActionResult GetHealth() //FINDALL
-        {
-            return Ok(true);
-        }
+    
+        /// <summary>
+        /// Muestra todos los tipos de cabaña
+        /// </summary>
+        /// <returns></returns>
+
         // GET: api/<ValuesController>
         [HttpGet]
         public IActionResult Get()
@@ -58,6 +58,12 @@ namespace WebApi.Controllers
             return Ok(tipos);
 
         }
+
+        /// <summary>
+        /// Busca el tipo de cabaña por el nombre
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <returns></returns>
 
         [HttpGet("FindByName", Name = "BusquedaNombre")]
         public IActionResult GetNombre([FromQuery] string nombre)
@@ -79,12 +85,24 @@ namespace WebApi.Controllers
 
         }
 
+        /// <summary>
+        /// Busca el tipo de cabaña por el id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+
         // GET api/<ValuesController>/5
         [HttpGet("{id}", Name = "BusquedaId")]
         public string Get(int id)
         {
             return "value";
         }
+
+        /// <summary>
+        /// Crea el tipo de cabaña
+        /// </summary>
+        /// <param name="tipo"></param>
+        /// <returns></returns>
 
         // POST api/<ValuesController>
         [HttpPost]
@@ -121,6 +139,13 @@ namespace WebApi.Controllers
             return Ok(tipo);
         }
 
+        /// <summary>
+        /// Modifica el tipo de cabaña
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <param name="tipo"></param>
+        /// <returns></returns>
+
         // PUT api/<ValuesController>/5
         [HttpPut("{nombre}")]
         [Authorize]
@@ -152,6 +177,13 @@ namespace WebApi.Controllers
             return Ok(tipo);
 
         }
+
+        /// <summary>
+        /// Borra el tipo de cabaña
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <returns></returns>
+        /// <exception cref="ExisteOtroElementoRelacionado"></exception>
 
         // DELETE api/<ValuesController>/5
         [HttpDelete("{nombre}",Name = "Borrar")]

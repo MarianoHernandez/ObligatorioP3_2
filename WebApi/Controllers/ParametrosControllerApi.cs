@@ -12,6 +12,7 @@ using Aplicacion.AplicacionesTipoCabania;
 
 namespace WebApi.Controllers
 {
+
     [Route("api/Parametro")]
     [ApiController]
     public class ParametrosControllerApi : ControllerBase
@@ -27,12 +28,26 @@ namespace WebApi.Controllers
             UpdateParametro = updateParametro;
         }
 
+        /// <summary>
+        /// Ingresa el parametro
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <returns></returns>
+
         // GET api/<ParametrosControllerApi>/5
         [HttpGet("{nombre}")]
         public string Get(string nombre)
         {
             return "value";
         }
+
+
+        /// <summary>
+        /// Modifica ese parametro
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
 
         // PUT api/<ParametrosControllerApi>/5
         [HttpPut("{nombre}")]

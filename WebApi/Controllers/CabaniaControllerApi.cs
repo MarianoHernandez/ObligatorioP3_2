@@ -44,12 +44,13 @@ namespace WebApi.Controllers
             FiltroPrecio = filtroPrecio;
         }
 
-        // GET: api/<CabaniaControllerApi>
-        [HttpGet("health")]
-        public IActionResult GetHealth() //FINDALL
-        {
-            return Ok(true);
-        }
+
+        /// <summary>
+        /// Muestra todas las cabañas
+        /// </summary>
+        /// <returns></returns>
+        /// 
+
         // GET: api/<CabaniaControllerApi>
         [HttpGet("index", Name = "Index")]
         public IActionResult Get() //FINDALL
@@ -58,6 +59,11 @@ namespace WebApi.Controllers
             return Ok(cabanias);
         }
 
+        /// <summary>
+        /// Busca la cabaña por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 
         // GET api/<CabaniaControllerApi>/5
         [HttpGet("{id}")]
@@ -77,6 +83,12 @@ namespace WebApi.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        /// <summary>
+        /// Crea la cabaña
+        /// </summary>
+        /// <param name="cabania"></param>
+        /// <returns></returns>
 
         // POST api/<CabaniaControllerApi>
         [HttpPost]
@@ -114,6 +126,15 @@ namespace WebApi.Controllers
             return Ok(cabania);
         }
 
+        /// <summary>
+        /// Busca la cabaña filtradas
+        /// </summary>
+        /// <param name="Nombre"></param>
+        /// <param name="TipoID"></param>
+        /// <param name="CantidadPersonas"></param>
+        /// <param name="Habilitada"></param>
+        /// <returns></returns>
+
         // GET api/<CabaniaControllerApi>
         [HttpGet("MostrerFiltradas")]
         public IActionResult MostrerFiltradas([FromQuery] string? Nombre, int? TipoID, int? CantidadPersonas, bool? Habilitada)
@@ -121,6 +142,12 @@ namespace WebApi.Controllers
             IEnumerable<CabaniaDTO> filtradas = BusquedaConFiltros.GetCabanias(Nombre, TipoID, CantidadPersonas, Habilitada);
             return Ok(filtradas);
         }
+
+        /// <summary>
+        /// Busca la cabaña por costo
+        /// </summary>
+        /// <param name="costo"></param>
+        /// <returns></returns>
 
         [HttpGet("PrecioFiltro")]
         public IActionResult PrecioFiltradas([FromQuery] decimal costo)
