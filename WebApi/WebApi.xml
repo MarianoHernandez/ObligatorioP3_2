@@ -4,28 +4,28 @@
         <name>WebApi</name>
     </assembly>
     <members>
-        <member name="M:WebApi.Controllers.CabaniaControllerApi.Get">
+        <member name="M:WebApi.Controllers.CabaniaController.Get">
             <summary>
             Muestra todas las cabañas
             </summary>
             <returns></returns>
             
         </member>
-        <member name="M:WebApi.Controllers.CabaniaControllerApi.Get(System.Int32)">
+        <member name="M:WebApi.Controllers.CabaniaController.Get(System.Int32)">
             <summary>
             Busca la cabaña por id
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:WebApi.Controllers.CabaniaControllerApi.Post(DTOs.CabaniaDTO)">
+        <member name="M:WebApi.Controllers.CabaniaController.Post(DTOs.CabaniaDTO)">
             <summary>
             Crea la cabaña
             </summary>
             <param name="cabania"></param>
             <returns></returns>
         </member>
-        <member name="M:WebApi.Controllers.CabaniaControllerApi.MostrerFiltradas(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean})">
+        <member name="M:WebApi.Controllers.CabaniaController.MostrerFiltradas(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean})">
             <summary>
             Busca la cabaña filtradas
             </summary>
@@ -35,7 +35,7 @@
             <param name="Habilitada"></param>
             <returns></returns>
         </member>
-        <member name="M:WebApi.Controllers.CabaniaControllerApi.PrecioFiltradas(System.Decimal)">
+        <member name="M:WebApi.Controllers.CabaniaController.PrecioFiltradas(System.Decimal)">
             <summary>
             Busca la cabaña por costo
             </summary>
